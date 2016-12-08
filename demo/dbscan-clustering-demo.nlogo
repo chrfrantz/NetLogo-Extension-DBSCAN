@@ -32,6 +32,7 @@ end
 to cluster-by-variable
   setup
 
+  ; Cluster agents by variable "wealth", with at least 3 members to constitute a cluster, and a maximum value difference of 3
   let clusters dbscan:cluster-by-variable agents "wealth" 3 3
 
   ; Show number of clusters
@@ -57,6 +58,7 @@ end
 to cluster-by-location
   setup
 
+  ; Cluster agents by location, with at least 3 members to constitute a cluster, and a maximum distance of 3
   let clusters dbscan:cluster-by-location agents 3 3
 
   ; Show number of clusters
