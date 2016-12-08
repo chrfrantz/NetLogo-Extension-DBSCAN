@@ -18,6 +18,8 @@ The reporter returns a nested list of clustered agents.
 Example:
 
 ```
+; Import extension
+extensions [dbscan]
 
 ... instantiate agents with variable "wealth" ...
 
@@ -47,6 +49,8 @@ The reporter returns a nested list of clustered agents.
 Example:
 
 ```
+; Import extension
+extensions [dbscan]
 
 ... instantiate agents with coordinates ...
 
