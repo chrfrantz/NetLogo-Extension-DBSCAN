@@ -32,8 +32,8 @@ end
 to cluster-by-variable
   setup
 
-  ; Cluster agents by variable "wealth", with at least 3 members to constitute a cluster, and a maximum value difference of 3
-  let clusters dbscan:cluster-by-variable agents "wealth" 3 3
+  ; Cluster agents by variable "wealth", with at least *minimum-number-of-members* members to constitute a cluster, and a maximum value difference of *maximum-distance*
+  let clusters dbscan:cluster-by-variable agents "wealth" minimum-number-of-members maximum-distance
 
   ; Show number of clusters
   output-print (word "Number of clusters: " (length clusters))
@@ -58,8 +58,8 @@ end
 to cluster-by-location
   setup
 
-  ; Cluster agents by location, with at least 3 members to constitute a cluster, and a maximum distance of 3
-  let clusters dbscan:cluster-by-location agents 3 3
+  ; Cluster agents by location, with at least *minimum-number-of-members* members to constitute a cluster, and a maximum distance of *maximum-distance*
+  let clusters dbscan:cluster-by-location agents minimum-number-of-members maximum-distance
 
   ; Show number of clusters
   output-print (word "Number of clusters: " (length clusters))
@@ -90,7 +90,7 @@ GRAPHICS-WINDOW
 12
 13.0
 1
-8
+9
 1
 1
 1
@@ -149,42 +149,58 @@ NIL
 NIL
 1
 
+SLIDER
+185
+12
+357
+45
+maximum-distance
+maximum-distance
+0
+20
+3
+1
+1
+NIL
+HORIZONTAL
+
+SLIDER
+185
+54
+397
+87
+minimum-number-of-members
+minimum-number-of-members
+0
+20
+3
+1
+1
+NIL
+HORIZONTAL
+
 @#$#@#$#@
 ## WHAT IS IT?
 
-(a general understanding of what the model is trying to show or explain)
+This model demontrates the use of the DBSCAN extension. It highlights both clustering by variable as well as location.
 
 ## HOW IT WORKS
 
-(what rules the agents use to create the overall behavior of the model)
+For variable-based clustering, individuals are clustered based on the value difference of their wealth levels.
+
+For location-based clustering, individuals are clustered based on their proximity.
 
 ## HOW TO USE IT
 
-(how to use the model, including a description of each of the items in the Interface tab)
-
-## THINGS TO NOTICE
-
-(suggested things for the user to notice while running the model)
+Click either button and observe how the clustering works both for variable-based clustering and location-based clustering.
 
 ## THINGS TO TRY
 
-(suggested things for the user to try to do (move sliders, switches, etc.) with the model)
-
-## EXTENDING THE MODEL
-
-(suggested things to add or change in the Code tab to make the model more complicated, detailed, accurate, etc.)
+Try varying the permissive distance (i.e. wealth difference levels for variable-based clustering, and spatial distance for location-based clustering) as well as the number of members required to form a cluster.
 
 ## NETLOGO FEATURES
 
-(interesting or unusual features of NetLogo that the model uses, particularly in the Code tab; or where workarounds were needed for missing features)
-
-## RELATED MODELS
-
-(models in the NetLogo Models Library and elsewhere which are of related interest)
-
-## CREDITS AND REFERENCES
-
-(a reference to the model's URL on the web if it has one, as well as any other necessary credits, citations, and links)
+Note that this model relies on the DBSCAN extension found under https://github.com/chrfrantz/NetLogo-Extension-DBSCAN/
 @#$#@#$#@
 default
 true

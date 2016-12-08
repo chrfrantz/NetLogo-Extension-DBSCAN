@@ -77,10 +77,10 @@ Clustering agents by location should produce the following output.
 
 ### Variant 1: Downloading jar files
 
-To install the extension, download the zip file containing the latest version from the releases page and unzip it in the `NetLogo/extensions` folder of your NetLogo installation (the final structure should be `NetLogo/extensions/dbscan/<jar files>`).
+To install the extension, download the zip file containing the latest version from the releases page. It contains a folder `dbscan` that contains all relevant jar files. Unzip it to the `NetLogo/extensions` folder of your NetLogo installation (the final structure should be `NetLogo/extensions/dbscan/<jar files>`).
 
 ### Variant 2: Building from source
 
-You can build the extension from scratch using maven by running `mvn package` after cloning the repository. In addition, you will need to do the same for the [DBSCAN repository](https://github.com/chrfrantz/DBSCAN.git) which contains the underlying DBSCAN algorithm. Place both jar files in the extensions subfolder `dbscan` (see Variant 1).
+You can build the extension from scratch using maven by running `mvn package` after cloning the repository. In addition, you will need to do the same for the [DBSCAN repository](https://github.com/chrfrantz/DBSCAN.git) which contains the underlying DBSCAN algorithm. Place both jar files in the extensions subfolder `dbscan` (following the structure described under Variant 1).
 
 
