@@ -46,6 +46,8 @@ The reporter returns a nested list of clustered agents.
 
 Example:
 
+```
+
 ... instantiate agents with coordinates ...
 
 ; Cluster agents by location, with at least 3 members to constitute a cluster, and a maximum distance of 3
