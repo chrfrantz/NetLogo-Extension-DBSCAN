@@ -38,7 +38,7 @@ let ctr 1
 
 ### Clustering by location
 
-`cluster-by-location` *agentset-to-be-clustered* *minimum-members* *maximum-distance*
+Syntax: `cluster-by-location` *agentset-to-be-clustered* *minimum-members* *maximum-distance*
 
 Clusters a given agentset *agents-to-be-clustered* by proximity, requiring a minimum of *minimum-members* agents to constitute a cluster with a maximum distance *maximum-distance*.
 
