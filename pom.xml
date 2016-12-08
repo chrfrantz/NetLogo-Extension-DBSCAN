@@ -1,0 +1,81 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>org.nlogo.extensions.dbscan</groupId>
+  <artifactId>dbscan</artifactId>
+  <version>0.1</version>
+  <packaging>jar</packaging>
+
+  <repositories>
+  <repository>
+      <id>in-project</id>
+      <name>In Project Repo</name>
+      <url>file://${project.basedir}/libs</url>
+    </repository>
+    <repository>
+      <id>jitpack.io</id>
+      <url>https://jitpack.io</url>
+    </repository>
+  </repositories>
+
+  <properties>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>NetLogo</groupId>
+      <artifactId>NetLogo</artifactId>
+      <version>5.3.1</version>
+    </dependency>
+    <dependency>
+      <groupId>com.github.chrfrantz</groupId>
+      <artifactId>DBSCAN</artifactId>
+      <version>8f0532d80f775f9a27e811fa6c2901adbeae3ba9</version>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.9</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+  
+  <build>
+    <finalName>${project.name}</finalName>
+    <plugins>
+	  <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <executions>
+          <!-- Prevent test compilation as of Scala dependency -->
+		  <execution>
+            <id>default-testCompile</id>
+            <phase>test-compile</phase>
+            <configuration>
+              <testExcludes>
+                <exclude>**/TestNetLogoDBSCAN.java</exclude>
+              </testExcludes>
+            </configuration> 
+            <goals>
+              <goal>testCompile</goal>
+            </goals>
+          </execution>                  
+        </executions>
+      </plugin>
+	  <plugin>
+	    <groupId>org.apache.maven.plugins</groupId>
+	    <artifactId>maven-jar-plugin</artifactId>
+		<configuration>
+          <archive>
+            <manifestFile>src/main/resources/manifest.txt</manifestFile>
+          </archive>
+        </configuration>
+	  </plugin>
+    </plugins>
+  </build>
+
+</project>
