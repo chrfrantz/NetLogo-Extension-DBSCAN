@@ -103,9 +103,9 @@ To install the extension, download the zip file containing the latest version fr
 
 You can build the extension from scratch using maven after cloning the repository. 
 
-* For NetLogo version 5, run `mvn package -f pom-v5.xml`
+* For NetLogo version 5, run `mvn clean package -f pom-v5.xml`
 
-* For NetLogo version 6, run `mvn package -f pom-v6.xml`
+* For NetLogo version 6, run `mvn clean package -f pom-v6.xml`
 
 In addition, you will need to build the [DBSCAN repository](https://github.com/chrfrantz/DBSCAN.git) (Command: `mvn package`) which contains the underlying DBSCAN algorithm. Place both jar files in the extensions subfolder `dbscan` (following the structure described under Variant 1).
 
