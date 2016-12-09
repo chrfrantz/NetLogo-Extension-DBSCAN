@@ -22,9 +22,9 @@
   <properties>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
-	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
-  
+
   <dependencies>
     <dependency>
       <groupId>com.github.chrfrantz</groupId>
@@ -38,10 +38,10 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
-  
+
   <build>
     <finalName>dbscan</finalName>
-	<resources>
+    <resources>
       <resource>
         <directory>src/test</directory>
         <excludes>
@@ -50,13 +50,13 @@
       </resource>
     </resources>
     <plugins>
-	  <plugin>
+      <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
-		<version>3.6.0</version>
+        <version>3.6.0</version>
         <executions>
           <!-- Prevent test compilation as of missing dependency in NetLogoLite.jar -->
-		  <execution>
+          <execution>
             <id>default-testCompile</id>
             <phase>test-compile</phase>
             <configuration>
@@ -70,16 +70,16 @@
           </execution>                  
         </executions>
       </plugin>
-	  <plugin>
-	    <groupId>org.apache.maven.plugins</groupId>
-	    <artifactId>maven-jar-plugin</artifactId>
-		<version>3.0.2</version>
-		<configuration>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>3.0.2</version>
+        <configuration>
           <archive>
             <manifestFile>src/main/resources/manifest.txt</manifestFile>
           </archive>
         </configuration>
-	  </plugin>
+      </plugin>
     </plugins>
   </build>
 

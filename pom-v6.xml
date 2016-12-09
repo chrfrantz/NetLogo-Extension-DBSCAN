@@ -8,12 +8,12 @@
     <version>0.1</version>
     <relativePath>pom-root.xml</relativePath>
   </parent>
-  
+
   <groupId>org.nlogo.extensions.dbscan</groupId>
   <artifactId>dbscan-NetLogo6</artifactId>
   <version>0.1</version>
-  <packaging>jar</packaging>	
-	
+  <packaging>jar</packaging>
+
   <dependencies>
     <dependency>
       <groupId>NetLogo</groupId>
@@ -26,11 +26,11 @@
       <version>2.12.0</version>
     </dependency>
   </dependencies>
-	  
+
   <build>
     <plugins>
-	  <!-- Make copy of source files (and recovery afterwards) before applying syntax changes to accommodate NetLogo Extensions API v6 -->
-	  <plugin>
+      <!-- Make copy of source files (and recovery afterwards) before applying syntax changes to accommodate NetLogo Extensions API v6 -->
+      <plugin>
         <artifactId>maven-antrun-plugin</artifactId>
         <version>1.4</version>
         <executions>
@@ -39,9 +39,9 @@
             <phase>generate-sources</phase>
             <configuration>
               <tasks>
-                <copy file="src/main/java/org/nlogo/extensions/dbscan/DBSCANExtension.java" tofile="src/main/java/org/nlogo/extensions/dbscan/DBSCANExtension.bak"/>
-		        <copy file="src/test/java/org/nlogo/extensions/dbscan/TestNetLogoDBSCAN.java" tofile="src/test/java/org/nlogo/extensions/dbscan/TestNetLogoDBSCAN.bak"/>
-		        <copy file="src/main/resources/manifest.txt" tofile="src/main/resources/manifest.bak"/>
+                <copy file="src/main/java/org/nlogo/extensions/dbscan/DBSCANExtension.java" tofile="tmp/DBSCANExtension.bak"/>
+                <copy file="src/test/java/org/nlogo/extensions/dbscan/TestNetLogoDBSCAN.java" tofile="tmp/TestNetLogoDBSCAN.bak"/>
+                <copy file="src/main/resources/manifest.txt" tofile="tmp/manifest.bak"/>
               </tasks>
             </configuration>
             <goals>
@@ -50,12 +50,12 @@
           </execution>
           <execution>
             <id>restore-source-file</id>
-            <phase>test</phase>
+            <phase>package</phase>
             <configuration>
               <tasks>
-                <move file="src/main/java/org/nlogo/extensions/dbscan/DBSCANExtension.bak" tofile="src/main/java/org/nlogo/extensions/dbscan/DBSCANExtension.java"/>
-		        <move file="src/test/java/org/nlogo/extensions/dbscan/TestNetLogoDBSCAN.bak" tofile="src/test/java/org/nlogo/extensions/dbscan/TestNetLogoDBSCAN.java"/>
-		        <move file="src/main/resources/manifest.bak" tofile="src/main/resources/manifest.txt"/>
+                <move file="tmp/DBSCANExtension.bak" tofile="src/main/java/org/nlogo/extensions/dbscan/DBSCANExtension.java"/>
+                <move file="tmp/TestNetLogoDBSCAN.bak" tofile="src/test/java/org/nlogo/extensions/dbscan/TestNetLogoDBSCAN.java"/>
+                <move file="tmp/manifest.bak" tofile="src/main/resources/manifest.txt"/>
               </tasks>
             </configuration>
             <goals>
@@ -64,21 +64,21 @@
           </execution>
         </executions>
       </plugin>
-	  <!-- Replacing syntax to accommodate NetLogo Extensions API v6 -->
+      <!-- Replacing syntax to accommodate NetLogo Extensions API v6 -->
       <plugin>
-	    <groupId>com.google.code.maven-replacer-plugin</groupId>
-	    <artifactId>replacer</artifactId>
-		<version>1.5.3</version>
-		<executions>
-		  <execution>
-			<phase>process-sources</phase>
-		    <goals>
-		      <goal>replace</goal>
+        <groupId>com.google.code.maven-replacer-plugin</groupId>
+        <artifactId>replacer</artifactId>
+        <version>1.5.3</version>
+        <executions>
+          <execution>
+            <phase>process-sources</phase>
+            <goals>
+              <goal>replace</goal>
             </goals> 
           </execution>
-	    </executions>
+        </executions>
         <configuration>
-	      <includes>
+          <includes>
             <include>${basedir}/src/main/java/org/nlogo/extensions/dbscan/DBSCANExtension.java</include>
             <include>${basedir}/src/test/java/org/nlogo/extensions/dbscan/TestNetLogoDBSCAN.java</include>
             <include>${basedir}/src/main/resources/manifest.txt</include>
@@ -96,7 +96,7 @@
               <token>import org.nlogo.api.DefaultReporter;</token>
               <value>import org.nlogo.api.Reporter;</value> 
             </replacement>
-			<replacement>
+            <replacement>
               <token>import org.nlogo.api.Syntax;</token>
               <value>import org.nlogo.core.Syntax;
 import org.nlogo.core.SyntaxJ;</value>
@@ -109,10 +109,10 @@ import org.nlogo.core.SyntaxJ;</value>
               <token>extends DefaultReporter</token>
               <value>implements Reporter</value>
             </replacement>
-			<replacement>
-			  <token>java-netlogo-clustering-test-v5.nlogo</token>
-			  <value>java-netlogo-clustering-test-v6.nlogo</value>
-			</replacement>
+            <replacement>
+              <token>java-netlogo-clustering-test-v5.nlogo</token>
+              <value>java-netlogo-clustering-test-v6.nlogo</value>
+            </replacement>
           </replacements>
         </configuration>
       </plugin>
