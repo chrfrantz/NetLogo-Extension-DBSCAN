@@ -47,7 +47,7 @@ public class TestNetLogoDBSCAN {
 			fail("Problems when opening NetLogo model file: " + e1.getMessage());
 		}
 		
-		World world = ws.world;
+		World world = ws.world();
 		
 		LogoListBuilder b = new LogoListBuilder();
 		AgentSet breed = world.getBreed(AGENTS);

@@ -11,6 +11,7 @@ import org.nlogo.agent.Turtle;
 import org.nlogo.api.AgentSet;
 import org.nlogo.api.Argument;
 import org.nlogo.api.Context;
+import org.nlogo.api.DefaultClassManager;
 import org.nlogo.api.DefaultReporter;
 import org.nlogo.api.ExtensionException;
 import org.nlogo.api.LogoException;
@@ -26,7 +27,7 @@ import org.nlogo.extensions.dbscan.metrics.DistanceMetricNetLogoLocation;
  * @author Christopher Frantz <cf@christopherfrantz.org>
  *
  */
-public class DBSCANExtension extends org.nlogo.api.DefaultClassManager {
+public class DBSCANExtension extends DefaultClassManager {
 
 	@Override
 	public void load(PrimitiveManager primitiveManager) throws ExtensionException {
