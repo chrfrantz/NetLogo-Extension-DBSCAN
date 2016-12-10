@@ -5,6 +5,13 @@ import org.christopherfrantz.dbscan.DistanceMetric;
 import org.nlogo.agent.Turtle;
 import org.nlogo.api.AgentException;
 
+/**
+ * Distance metric implementation for agent variables for agents of type turtle.
+ * This extension is used for unit tests.
+ * 
+ * @author Christopher Frantz <cf@christopherfrantz.org>
+ *
+ */
 public class DistanceMetricNetLogoTurtles implements DistanceMetric<Turtle>{
 
 	private String field = null;

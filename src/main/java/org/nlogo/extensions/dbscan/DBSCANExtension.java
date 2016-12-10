@@ -78,7 +78,7 @@ public class DBSCANExtension extends DefaultClassManager {
 			
 			// Convert input agentset to collection
 			Collection<Agent> inputCollection = new ArrayList<>();
-			Iterator it = inputValues.agents().iterator();
+			Iterator<?> it = inputValues.agents().iterator();
 			while (it.hasNext()) {
 				inputCollection.add((Agent) it.next());
 			}
@@ -147,7 +147,7 @@ public class DBSCANExtension extends DefaultClassManager {
 			
 			// Convert input agentset to collection
 			Collection<Turtle> inputCollection = new ArrayList<>();
-			Iterator it = inputValues.agents().iterator();
+			Iterator<?> it = inputValues.agents().iterator();
 			while (it.hasNext()) {
 				inputCollection.add((Turtle) it.next());
 			}

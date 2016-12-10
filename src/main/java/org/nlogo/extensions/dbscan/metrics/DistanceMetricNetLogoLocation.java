@@ -2,10 +2,14 @@ package org.nlogo.extensions.dbscan.metrics;
 
 import org.christopherfrantz.dbscan.DBSCANClusteringException;
 import org.christopherfrantz.dbscan.DistanceMetric;
-import org.nlogo.agent.Agent;
 import org.nlogo.agent.Turtle;
-import org.nlogo.api.AgentException;
 
+/**
+ * Distance metric implementation for locations.
+ * 
+ * @author Christopher Frantz <cf@christopherfrantz.org>
+ *
+ */
 public class DistanceMetricNetLogoLocation implements DistanceMetric<Turtle>{
 
 	private static final String X_COORDINATE = "XCOR";
