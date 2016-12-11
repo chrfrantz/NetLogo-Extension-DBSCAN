@@ -35,7 +35,7 @@ Example (NetLogo 5):
 ; Colour and label the agents by cluster
 let ctr 1
 (foreach clusters (n-of (length clusters) base-colors)
-  [ let aset turtles with [member? self ?1 ]
+  [ let aset turtles with [ member? self ?1 ]
     ask aset
       [ set color ?2
         set label (word "ID: " who ", Cluster: " ctr ", Wealth: " wealth) ]

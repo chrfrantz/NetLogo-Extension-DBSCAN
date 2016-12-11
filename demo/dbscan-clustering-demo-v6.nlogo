@@ -72,7 +72,7 @@ to cluster-by-location
   output-print "Clusters as AgentSets:"
   let ctr 1
   (foreach clusters (n-of (length clusters) base-colors)
-    [ [ x y ] -> let aset turtles with [member? self x ]
+    [ [ x y ] -> let aset turtles with [ member? self x ]
       ask aset
         [ set color y
           set label (word "ID: " who ", Cluster: " ctr) ]
