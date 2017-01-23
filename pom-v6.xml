@@ -5,20 +5,20 @@
   <parent>
     <groupId>org.nlogo.extensions.dbscan</groupId>
     <artifactId>dbscan</artifactId>
-    <version>0.1</version>
+    <version>0.2</version>
     <relativePath>pom-root.xml</relativePath>
   </parent>
 
   <groupId>org.nlogo.extensions.dbscan</groupId>
   <artifactId>dbscan-NetLogo6</artifactId>
-  <version>0.1</version>
+  <version>0.2</version>
   <packaging>jar</packaging>
 
   <dependencies>
     <dependency>
       <groupId>NetLogo</groupId>
       <artifactId>NetLogo</artifactId>
-      <version>6.0-BETA2</version>
+      <version>6.0.0</version>
     </dependency>
     <dependency>
       <groupId>org.scala-lang</groupId>

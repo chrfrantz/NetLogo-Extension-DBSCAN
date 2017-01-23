@@ -4,7 +4,7 @@
 
   <groupId>org.nlogo.extensions.dbscan</groupId>
   <artifactId>dbscan</artifactId>
-  <version>0.1</version>
+  <version>0.2</version>
   <packaging>pom</packaging>
 
   <repositories>
@@ -67,7 +67,7 @@
             <goals>
               <goal>testCompile</goal>
             </goals>
-          </execution>                  
+          </execution>
         </executions>
       </plugin>
       <plugin>

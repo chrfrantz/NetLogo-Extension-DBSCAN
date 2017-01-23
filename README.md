@@ -44,7 +44,7 @@ let ctr 1
     set ctr (ctr + 1) ])
 ```
 
-The same example in NetLogo 6:
+The same example in NetLogo 6 (due to syntax changes in NetLogo):
 
 ```
 ; Colour and label the agents by cluster
