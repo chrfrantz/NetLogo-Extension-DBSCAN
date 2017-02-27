@@ -50,7 +50,7 @@ public class DBSCANExtension extends DefaultClassManager {
         }
 
         @Override
-        public Object report(Argument[] args, Context ctx)
+        public Object report(final Argument[] args, final Context ctx)
                 throws ExtensionException, LogoException {
 
             AgentSet inputValues = null;
