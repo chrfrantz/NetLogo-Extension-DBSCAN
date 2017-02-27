@@ -31,8 +31,8 @@ public class TestNetLogoDBSCAN {
     @Test
     public void testClusteringInExistingNetLogoModelFromJava() {
 
-        final String TESTFILE = System.getProperty("user.dir") + 
-                "/src/test/resources/java-netlogo-clustering-test-v5.nlogo";
+        final String TESTFILE = System.getProperty("user.dir")
+                + "/src/test/resources/java-netlogo-clustering-test-v5.nlogo";
 
         Random random = new Random(4522);
 
