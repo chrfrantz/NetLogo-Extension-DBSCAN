@@ -49,14 +49,14 @@ The same example in NetLogo 6 (due to syntax changes in NetLogo):
 ```
 ; Colour and label the agents by cluster
 let ctr 1
-  (foreach clusters (n-of (length clusters) base-colors)
-    [ [ x y ] -> let aset turtles with [ member? self x ]
-      ask aset
-        [ set color y
-          set label (word "ID: " who ", Cluster: " ctr ", Wealth: " wealth) ]
-      ; Print agent sets
-      output-print (word "Cluster " ctr ": " aset)
-      set ctr (ctr + 1) ])
+(foreach clusters (n-of (length clusters) base-colors)
+  [ [ x y ] -> let aset turtles with [ member? self x ]
+    ask aset
+      [ set color y
+        set label (word "ID: " who ", Cluster: " ctr ", Wealth: " wealth) ]
+    ; Print agent sets
+    output-print (word "Cluster " ctr ": " aset)
+    set ctr (ctr + 1) ])
 ```
 
 ### Clustering by location
