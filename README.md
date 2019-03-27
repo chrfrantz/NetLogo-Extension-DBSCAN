@@ -11,7 +11,9 @@ The extension contains two reporters, `cluster-by-variable` and `cluster-by-loca
 
 Syntax: `cluster-by-variable` *agents-to-be-clustered* *cluster-variable* *minimum-members* *maximum-distance*
 
-Clusters a given agentset *agents-to-be-clustered* by variable *cluster-variable*, requiring a minimum of *minimum-members* agents to constitute a cluster within a range of variable value difference, with the maximum value difference being *maximum-distance*.
+Clusters a given agentset *agents-to-be-clustered* by individual-level variable *cluster-variable*, along with two hyperparameters required for the operation of DBSCAN: 
+* *minimum-members*: a minimum number of agents to constitute a cluster, and 
+* *maximum-distance*: the maximum cluster variable value difference within a cluster.
 
 The reporter returns a nested list of clustered agents.
 
@@ -63,7 +65,9 @@ let ctr 1
 
 Syntax: `cluster-by-location` *agents-to-be-clustered* *minimum-members* *maximum-distance*
 
-Clusters a given agentset *agents-to-be-clustered* by proximity, requiring a minimum of *minimum-members* agents to constitute a cluster with a maximum distance *maximum-distance*.
+Clusters a given agentset *agents-to-be-clustered* by proximity, along with two hyperparameters required for the operation of DBSCAN: 
+* *minimum-members*: a minimum number of agents to constitute a cluster, and
+* *maximum-distance*: the maximum permissible distance between agents within a cluster.
 
 The reporter returns a nested list of clustered agents.
 
