@@ -5,13 +5,13 @@
   <parent>
     <groupId>org.nlogo.extensions.dbscan</groupId>
     <artifactId>dbscan</artifactId>
-    <version>0.2</version>
+    <version>0.2.1</version>
     <relativePath>pom-root.xml</relativePath>
   </parent>
   
   <groupId>org.nlogo.extensions.dbscan</groupId>
   <artifactId>dbscan-NetLogo5</artifactId>
-  <version>0.2</version>
+  <version>0.2.1</version>
   <packaging>jar</packaging>
   
   <dependencies>
