@@ -46,7 +46,7 @@ let ctr 1
     set ctr (ctr + 1) ])
 ```
 
-The same example in NetLogo 6 (due to syntax changes in NetLogo):
+The same example in NetLogo 6 or higher (due to syntax changes in NetLogo 6):
 
 ```
 ; Colour and label the agents by cluster
@@ -91,7 +91,7 @@ For more comprehensive examples for both reporters, try out the demo that corres
 
 * For NetLogo 5, use `demo/dbscan-clustering-demo-v5.nlogo`
 
-* For NetLogo 6, use `demo/dbscan-clustering-demo-v6.nlogo`
+* For NetLogo 6 (and higher), use `demo/dbscan-clustering-demo-v6.nlogo`
 
 Clustering agents by location should produce the following output (irrespective of NetLogo version).
 
@@ -99,11 +99,17 @@ Clustering agents by location should produce the following output (irrespective 
 
 ## Deployment
 
-### Variant 1: Downloading jar files
+The preferred deployment variant is to use the Extension Manager provided by NetLogo 6.1 and higher (see Variant 1). For older versions of NetLogo (i.e., 6.0 or lower) you can download the corresponding jar files directly (Variant 2). Alternatively, for all supported versions of NetLogo you can build the extension from source (Variant 3).
 
-To install the extension, download the zip file containing the latest version from the [releases page](https://github.com/chrfrantz/NetLogo-Extension-DBSCAN/releases) for your NetLogo version (5 or 6). It contains a folder `dbscan` that contains all relevant jar files. Unzip it to the `extensions` folder of your NetLogo installation (the final structure should correspond to `NetLogo x.x.x/app/extensions/dbscan/<jar files>`, with `x.x.x` being the installed NetLogo version).
+### Variant 1 (requires NetLogo 6.1.0 or higher): Installation using NetLogo Extension Manager
 
-### Variant 2: Building from source
+Use the Extension Manager provided by NetLogo by selecting `Tools` in the menu bar, followed by `Extensions ...`. In the dialog, scroll down to the extension `DBSCAN` and click `Install`. For more details about the Extension Manager, see its official [documentation](http://ccl.northwestern.edu/netlogo/docs/extension-manager.html).
+
+### Variant 2: Downloading jar files and placing in extensions folder
+
+To install the extension, download the zip file containing the latest version from the [releases page](https://github.com/chrfrantz/NetLogo-Extension-DBSCAN/releases) for your NetLogo version (5, 6, or 6.1). It contains a folder `dbscan` that contains all relevant jar files. Unzip it to the `extensions` folder of your NetLogo installation (the final structure should correspond to `NetLogo x.x.x/app/extensions/dbscan/<jar files>`, with `x.x.x` being the installed NetLogo version).
+
+### Variant 3: Building from source
 
 You can build the extension from scratch using maven after cloning the repository. 
 
@@ -111,6 +117,8 @@ You can build the extension from scratch using maven after cloning the repositor
 
 * For NetLogo version 6, run `mvn clean package -f pom-v6.xml`
 
-In addition, you will need to build the [DBSCAN repository](https://github.com/chrfrantz/DBSCAN.git) (Command: `mvn package`) which contains the underlying DBSCAN algorithm. Place both jar files in the extensions subfolder `dbscan` (following the structure described under Variant 1).
+* For NetLogo version 6.1, run `mvn clean package -f pom-v6.1.xml`
+
+In addition, you will need to build the [DBSCAN repository](https://github.com/chrfrantz/DBSCAN.git) (Command: `mvn package`) which contains the underlying DBSCAN algorithm. Place both jar files in the extensions subfolder `dbscan` (following the structure described under Variant 2).
 
 
