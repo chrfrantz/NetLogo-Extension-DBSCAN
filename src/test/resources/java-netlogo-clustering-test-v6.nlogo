@@ -1,74 +1,40 @@
+extensions [dbscan]
+
 globals [
   min-wealth
   max-wealth
   num-agents
+  clusters ; global variable for easy access during testing
 ]
 
-;turtles-own [
-;  wealth
-;]
+patches-own [ resource ]
 
 breed [ agents agt ]
 
-agents-own [
-  ; individual's vision radius
-  ;vision-radius
-  ; wealth
-  wealth
-  ; individual's resource dependence
-  ;dependence
-  ; individual's influence on resource governance
-  ;influence
-  ; wealth ranking within cluster (populated by cluster procedure)
-  ;rank-in-cluster
-  ; contribution of previous round
-  ;contribution
-  ; consumption of previous round
-  ;consumption
-  ; individual's neighbours
-  ;my-neighbours
-  ]
+agents-own [ wealth ]
 
+; Selectively called to parametrise agents
+to pre-setup
+  set num-agents 50
+end
 
 to setup
-  ; platform reset
-  clear-all
+  ; platform reset deactivated due to potential prior call to pre-setup
+  ;clear-all
 
   ; set the rng seed
   random-seed 5239942
 
-  ; shapes
-  ;set-default-shape agents "person"
-  ;set-default-shape obsRadii "circle"
-
   ; globals
-  ;set resource initial-resource
-  ;set min-radius 1
-  ;set max-radius 10
   set min-wealth 10
   set max-wealth 50
-  ;;set min-contribution 5
-  ;set max-contribution 10
-  ;;set min-consumption 5
-  ;set max-consumption 10
-
-  ; Stats-related
-  ;set max-wealth-val 1
-  ;set max-contribution-val 1
-  ;set max-consumption-val 1
-
-  ;set clustering false
 
   ; agents
   create-agents num-agents
   ask agents
-    [ setxy random-xcor random-ycor
-      ;set color red
-;      set pcolor green
-      ;set vision-radius (max (list min-radius (random max-radius)) )
-      ;draw-observation-radius xcor ycor vision-radius
+    [
+      setxy random-xcor random-ycor
       set wealth (max (list  min-wealth (random max-wealth)) )
-      ;set halo (make-halo xcor ycor vision-radius) ]
     ]
 
   reset-ticks
@@ -443,7 +409,7 @@ false
 Polygon -7500403 true true 270 75 225 30 30 225 75 270
 Polygon -7500403 true true 30 75 75 30 270 225 225 270
 @#$#@#$#@
-NetLogo 6.0-BETA2
+NetLogo 6.1.0
 @#$#@#$#@
 @#$#@#$#@
 @#$#@#$#@

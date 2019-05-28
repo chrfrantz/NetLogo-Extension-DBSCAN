@@ -3,10 +3,10 @@
 ; For the use with NetLogo version 5, check dbscan-clustering-demo-v5.nlogo.
 ;
 ; Author: Christopher Frantz (cf@christopherfrantz.org)
-; 
+;
 ; Last update: 25/05/2019
 ;
-; For documentation and details about supported NetLogo versions refer to 
+; For documentation and details about supported NetLogo versions refer to
 ; https://github.com/chrfrantz/NetLogo-Extension-DBSCAN#readme
 ;
 
@@ -19,10 +19,8 @@ globals [
 ]
 
 breed [ agents agt ]
-
-agents-own [
-  wealth
-]
+agents-own [ wealth ]
+patches-own [ resource ]
 
 to setup
   clear-all
@@ -34,18 +32,25 @@ to setup
   set max-wealth 100
 
   create-agents num-agents
+  ; Setup for clustering agents by location or variable
   ask agents
     [
       setxy random-xcor random-ycor
-      set wealth (max (list  min-wealth (random max-wealth)) )
+      set wealth (max (list min-wealth (random max-wealth)) )
+    ]
+
+  ; Setup for clustering patches by variable
+  ask patches
+    [
+      set resource one-of [50 100 200 500]
     ]
 end
 
-to cluster-by-variable
+to cluster-agents-by-variable
   setup
 
   ; Cluster agents by variable "wealth", with at least *minimum-number-of-members* members to constitute a cluster, and a maximum value difference of *maximum-distance*
-  let clusters dbscan:cluster-by-variable agents "wealth" minimum-number-of-members maximum-distance
+  let clusters dbscan:cluster-by-variable agents "wealth" minimum-number-of-members maximum-distance-agents
 
   ; Show number of clusters
   output-print (word "Number of clusters: " (length clusters))
@@ -67,11 +72,11 @@ to cluster-by-variable
       set ctr (ctr + 1) ])
 end
 
-to cluster-by-location
+to cluster-agents-by-location
   setup
 
-  ; Cluster agents by location, with at least *minimum-number-of-members* members to constitute a cluster, and a maximum distance of *maximum-distance*
-  let clusters dbscan:cluster-by-location agents minimum-number-of-members maximum-distance
+  ; Cluster agents by location, with at least *minimum-number-of-members* members to constitute a cluster, and a maximum distance of *maximum-distance-agents*
+  let clusters dbscan:cluster-by-location agents minimum-number-of-members maximum-distance-agents
 
   ; Show number of clusters
   output-print (word "Number of clusters: " (length clusters))
@@ -89,6 +94,31 @@ to cluster-by-location
         [ set color y
           set label (word "ID: " who ", Cluster: " ctr) ]
       ; Print agent sets
+      output-print (word "Cluster " ctr ": " aset)
+      set ctr (ctr + 1) ])
+end
+
+to cluster-patches-by-variable
+  setup
+
+  ; Cluster agents by variable "resource", with at least *minimum-number-of-members* members to constitute a cluster, and a maximum value difference of *maximum-distance-patches*
+  let clusters dbscan:cluster-by-variable patches "resource" minimum-number-of-members maximum-distance-patches
+
+  ; Show number of clusters
+  output-print (word "Number of clusters: " (length clusters))
+
+  ; Show clusters as returned by extension
+  output-print "Raw clusters:"
+  foreach clusters [ [x] -> output-print x ]
+
+  ; Colour and label individual agents based on cluster
+  output-print "Clusters as AgentSets:"
+  let ctr 1
+  (foreach clusters (n-of (length clusters) base-colors)
+    [ [ x y ] -> let aset patches with [ member? self x ]
+      ask aset
+        [ set pcolor y ]
+      ; Print patch clusters
       output-print (word "Cluster " ctr ": " aset)
       set ctr (ctr + 1) ])
 end
@@ -122,18 +152,18 @@ ticks
 
 OUTPUT
 14
-102
+145
 491
-368
+391
 11
 
 BUTTON
 14
 12
-149
+192
 45
 NIL
-cluster-by-variable
+cluster-agents-by-variable
 NIL
 1
 T
@@ -147,10 +177,10 @@ NIL
 BUTTON
 14
 54
-148
+191
 87
 NIL
-cluster-by-location
+cluster-agents-by-location
 NIL
 1
 T
@@ -162,12 +192,12 @@ NIL
 1
 
 SLIDER
-185
+234
 12
-357
+421
 45
-maximum-distance
-maximum-distance
+maximum-distance-agents
+maximum-distance-agents
 0
 20
 3.0
@@ -177,15 +207,47 @@ NIL
 HORIZONTAL
 
 SLIDER
-185
+234
 54
-397
+446
 87
 minimum-number-of-members
 minimum-number-of-members
 0
 20
 3.0
+1
+1
+NIL
+HORIZONTAL
+
+BUTTON
+14
+97
+198
+130
+NIL
+cluster-patches-by-variable
+NIL
+1
+T
+OBSERVER
+NIL
+NIL
+NIL
+NIL
+1
+
+SLIDER
+234
+97
+434
+130
+maximum-distance-patches
+maximum-distance-patches
+0
+100
+43.0
 1
 1
 NIL
@@ -519,7 +581,7 @@ false
 Polygon -7500403 true true 270 75 225 30 30 225 75 270
 Polygon -7500403 true true 30 75 75 30 270 225 225 270
 @#$#@#$#@
-NetLogo 6.0-BETA2
+NetLogo 6.1.0
 @#$#@#$#@
 @#$#@#$#@
 @#$#@#$#@

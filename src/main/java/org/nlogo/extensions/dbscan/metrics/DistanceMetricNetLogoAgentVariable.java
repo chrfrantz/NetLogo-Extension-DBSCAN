@@ -8,14 +8,15 @@ import org.nlogo.api.AgentException;
 /**
  * Distance metric implementation for agent variables.
  *
- * @author Christopher Frantz <cf@christopherfrantz.org>
+ * @author <a href="mailto:cf@christopherfrantz.org>Christopher Frantz</a>
+ * @version 0.3 (28.05.2019)
  *
  */
-public class DistanceMetricNetLogoAgents implements DistanceMetric<Agent>{
+public class DistanceMetricNetLogoAgentVariable implements DistanceMetric<Agent>{
 
     private String field = null;
 
-    public DistanceMetricNetLogoAgents(String field) {
+    public DistanceMetricNetLogoAgentVariable(String field) {
         this.field = field;
     }
     
@@ -26,17 +27,15 @@ public class DistanceMetricNetLogoAgents implements DistanceMetric<Agent>{
             Double val1Num = Double.parseDouble(val1.getTurtleOrLinkVariable(field).toString());
             Double val2Num = Double.parseDouble(val2.getTurtleOrLinkVariable(field).toString());
             return Math.abs(val1Num - val2Num);
-        } catch (ArrayIndexOutOfBoundsException e) {
+        } catch (ArrayIndexOutOfBoundsException | AgentException | NumberFormatException e) {
             try {
                 // ... before looking at breed level
                 Double val1Num = Double.parseDouble(val1.getBreedVariable(field).toString());
                 Double val2Num = Double.parseDouble(val2.getBreedVariable(field).toString());
                 return Math.abs(val1Num - val2Num);
-            } catch (NumberFormatException | AgentException e1) {
+            } catch (ArrayIndexOutOfBoundsException | NumberFormatException | AgentException e1) {
                 throw new DBSCANClusteringException(e1.getMessage());
             }
-        } catch (NumberFormatException | AgentException e) {
-            throw new DBSCANClusteringException(e.getMessage());
         }
     }
 
