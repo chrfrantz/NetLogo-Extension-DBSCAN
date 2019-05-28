@@ -7,13 +7,15 @@ It allows you to perform unsupervised density-based clustering based on specifie
 
 The extension contains two reporters, `cluster-by-variable` and `cluster-by-location`.
 
-### Clustering by variable
+### Clustering individuals by variable
 
-Syntax: `cluster-by-variable` *agents-to-be-clustered* *cluster-variable* *minimum-members* *maximum-distance*
+(since version 0.1)
 
-Clusters a given agentset *agents-to-be-clustered* by individual-level variable *cluster-variable*, along with two hyperparameters required for the operation of DBSCAN: 
-* *minimum-members*: a minimum number of agents to constitute a cluster, and 
-* *maximum-distance*: the maximum cluster variable value difference within a cluster.
+Syntax: `cluster-by-variable` **agents-to-be-clustered** **cluster-variable** **minimum-members** **maximum-distance**
+
+Clusters a given agentset **agents-to-be-clustered** by individual-level variable **cluster-variable**, along with two hyperparameters required for the operation of DBSCAN: 
+* **minimum-members**: a minimum number of agents to constitute a cluster, and 
+* **maximum-distance**: the maximum cluster variable value difference within a cluster.
 
 The reporter returns a nested list of clustered agents.
 
@@ -41,7 +43,7 @@ let ctr 1
     ask aset
       [ set color ?2
         set label (word "ID: " who ", Cluster: " ctr ", Wealth: " wealth) ]
-    ; Print agent sets
+    ; Print agent cluster sets
     output-print (word "Cluster " ctr ": " aset)
     set ctr (ctr + 1) ])
 ```
@@ -56,18 +58,63 @@ let ctr 1
     ask aset
       [ set color y
         set label (word "ID: " who ", Cluster: " ctr ", Wealth: " wealth) ]
-    ; Print agent sets
+    ; Print agent cluster sets
+    output-print (word "Cluster " ctr ": " aset)
+    set ctr (ctr + 1) ])
+```
+
+### Clustering patches by variable
+
+(since version 0.3)
+
+**Since version 0.3**, this extension also **supports the clustering of patches by variable**. However, this feature is **only supported for NetLogo 6 or higher**. Just to clarify, you can still install the latest version of the extension in NetLogo 5, but you won't be able to cluster patches.
+
+Syntax: `cluster-by-variable` **patches-to-be-clustered** **cluster-variable** **minimum-members** **maximum-distance**
+
+Clusters a given set of patches **patches-to-be-clustered** by patch variable **cluster-variable**, along with two hyperparameters required for the operation of DBSCAN: 
+* **minimum-members**: a minimum number of patches to constitute a cluster, and 
+* **maximum-distance**: the maximum cluster variable value difference within a cluster.
+
+The reporter returns a nested list of clustered patches.
+
+Example:
+
+```
+; Import extension
+extensions [dbscan]
+
+... instantiate patches with variable "resource" ...
+patches-own [ resource ]
+
+... and populate variable ...
+
+; Cluster patches by variable "resource", with at least 3 members to constitute a cluster, and a maximum value difference of 20
+let clusters dbscan:cluster-by-variable patches "resource" 3 20
+```
+
+The output can then be modified as exemplified in the following (only for NetLogo 6 onwards):
+
+```
+; Colour and label the agents by cluster
+let ctr 1
+(foreach clusters (n-of (length clusters) base-colors)
+  [ [ x y ] -> let aset patches with [ member? self x ]
+    ask aset
+      [ set pcolor y ]
+    ; Print patch cluster sets
     output-print (word "Cluster " ctr ": " aset)
     set ctr (ctr + 1) ])
 ```
 
 ### Clustering by location
 
-Syntax: `cluster-by-location` *agents-to-be-clustered* *minimum-members* *maximum-distance*
+(since version 0.1)
 
-Clusters a given agentset *agents-to-be-clustered* by proximity, along with two hyperparameters required for the operation of DBSCAN: 
-* *minimum-members*: a minimum number of agents to constitute a cluster, and
-* *maximum-distance*: the maximum permissible distance between agents within a cluster.
+Syntax: `cluster-by-location` **agents-to-be-clustered** **minimum-members** **maximum-distance**
+
+Clusters a given agentset **agents-to-be-clustered** by proximity, along with two hyperparameters required for the operation of DBSCAN: 
+* **minimum-members**: a minimum number of agents to constitute a cluster, and
+* **maximum-distance**: the maximum permissible distance between agents within a cluster.
 
 The reporter returns a nested list of clustered agents.
 
@@ -82,8 +129,7 @@ extensions [dbscan]
 ; Cluster agents by location, with at least 3 members to constitute a cluster, and a maximum distance of 3
 let clusters dbscan:cluster-by-location agents 3 3
 ```
-
-The clusters can then be used as shown in the previous section.
+The clusters can then be used as shown in the section **Clustering individuals by variable**.
 
 ## Demo
 
@@ -91,7 +137,7 @@ For more comprehensive examples for both reporters, try out the demo that corres
 
 * For NetLogo 5, use `demo/dbscan-clustering-demo-v5.nlogo`
 
-* For NetLogo 6 (and higher), use `demo/dbscan-clustering-demo-v6.nlogo`
+* For NetLogo 6 (and higher), use `demo/dbscan-clustering-demo-v6.nlogo` (Note that the NetLogo 6 demo model also includes an example for clustering patches.)
 
 Clustering agents by location should produce the following output (irrespective of NetLogo version).
 
@@ -99,9 +145,13 @@ Clustering agents by location should produce the following output (irrespective 
 
 ## Deployment
 
-The preferred deployment variant is to use the Extension Manager provided by NetLogo 6.1 and higher (see Variant 1). For older versions of NetLogo (i.e., 6.0 or lower) you can download the corresponding jar files directly (Variant 2). Alternatively, for all supported versions of NetLogo you can build the extension from source (Variant 3).
+The preferred deployment variant is simply to use the auto-installation feature of NetLogo 6.1 (see Variant 0). Alternatively, you can install it using the Extension Manager provided by NetLogo 6.1 and higher (see Variant 1). For older versions of NetLogo (i.e., 6.0 or lower) you can download the corresponding jar files directly (Variant 2). Alternatively, for all supported versions of NetLogo you can build the extension from source (Variant 3).
 
-### Variant 1 (requires NetLogo 6.1.0 or higher): Installation using NetLogo Extension Manager
+### Variant 0 (requires NetLogo 6.1.0 or higher): Auto-Installation
+
+To trigger the installation, simply add `extensions [dbscan]` at the top of your model file. NetLogo will then prompt you to confirm the installation of the extension. The installed extension will appear in the Extension Manager. For more details about the Extension Manager, see its official [documentation](http://ccl.northwestern.edu/netlogo/docs/extension-manager.html).
+
+### Variant 1 (requires NetLogo 6.1.0 or higher): Installation via NetLogo Extension Manager
 
 Use the Extension Manager provided by NetLogo by selecting `Tools` in the menu bar, followed by `Extensions ...`. In the dialog, scroll down to the extension `DBSCAN` and click `Install`. For more details about the Extension Manager, see its official [documentation](http://ccl.northwestern.edu/netlogo/docs/extension-manager.html).
 
@@ -120,5 +170,9 @@ You can build the extension from scratch using maven after cloning the repositor
 * For NetLogo version 6.1, run `mvn clean package -f pom-v6.1.xml`
 
 In addition, you will need to build the [DBSCAN repository](https://github.com/chrfrantz/DBSCAN.git) (Command: `mvn package`) which contains the underlying DBSCAN algorithm. Place both jar files in the extensions subfolder `dbscan` (following the structure described under Variant 2).
+
+## Bugs and requests
+
+If you discover bugs or have requests regarding additional features, please create an issue in the [issue tracker](https://github.com/chrfrantz/NetLogo-Extension-DBSCAN/issues).
 
 
