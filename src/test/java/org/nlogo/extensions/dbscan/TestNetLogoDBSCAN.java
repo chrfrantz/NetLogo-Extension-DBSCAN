@@ -25,6 +25,7 @@ import org.nlogo.headless.HeadlessWorkspace;
 
 /**
  * Tests DBSCAN clusterer using an existing model and injecting agents to be clustered.
+ * These tests have been written against the NetLogo API 6.1.
  * 
  * Setup:
  * - Import all jar libraries from the app folder contained in the in NetLogo installation folder.
@@ -93,7 +94,7 @@ public class TestNetLogoDBSCAN {
             }
 
             if (debugOutput) {
-            	System.out.print("ID: " + t._id + ", Wealth: ");
+            	System.out.print("ID: " + t.id() + ", Wealth: ");
             }
 
             try {
@@ -171,7 +172,7 @@ public class TestNetLogoDBSCAN {
             }
 
             if (debugOutput) {
-            	System.out.print("ID: " + t._id + ", Wealth: ");
+            	System.out.print("ID: " + t.id() + ", Wealth: ");
             }
 
             try {
