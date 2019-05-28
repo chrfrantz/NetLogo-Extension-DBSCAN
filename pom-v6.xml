@@ -5,13 +5,13 @@
   <parent>
     <groupId>org.nlogo.extensions.dbscan</groupId>
     <artifactId>dbscan</artifactId>
-    <version>0.2.1</version>
+    <version>0.3</version>
     <relativePath>pom-root.xml</relativePath>
   </parent>
 
   <groupId>org.nlogo.extensions.dbscan</groupId>
   <artifactId>dbscan-NetLogo6</artifactId>
-  <version>0.2.1</version>
+  <version>0.3</version>
   <packaging>jar</packaging>
 
   <dependencies>
@@ -29,6 +29,26 @@
 
   <build>
     <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.6.0</version>
+        <executions>
+          <!-- Prevent test compilation as of considerable API differences (automated testing done only on latest supported API) -->
+          <execution>
+            <id>default-testCompile</id>
+            <phase>test-compile</phase>
+            <configuration>
+              <testExcludes>
+                <exclude>**/TestNetLogoDBSCAN.java</exclude>
+              </testExcludes>
+            </configuration>
+            <goals>
+              <goal>testCompile</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
       <!-- Make copy of source files (and recovery afterwards) before applying syntax changes to accommodate NetLogo Extensions API v6 -->
       <plugin>
         <artifactId>maven-antrun-plugin</artifactId>
@@ -39,8 +59,6 @@
             <phase>generate-sources</phase>
             <configuration>
               <tasks>
-                <copy file="src/main/java/org/nlogo/extensions/dbscan/DBSCANExtension.java" tofile="tmp/DBSCANExtension.bak"/>
-                <copy file="src/test/java/org/nlogo/extensions/dbscan/TestNetLogoDBSCAN.java" tofile="tmp/TestNetLogoDBSCAN.bak"/>
                 <copy file="src/main/resources/manifest.txt" tofile="tmp/manifest.bak"/>
               </tasks>
             </configuration>
@@ -53,8 +71,6 @@
             <phase>package</phase>
             <configuration>
               <tasks>
-                <move file="tmp/DBSCANExtension.bak" tofile="src/main/java/org/nlogo/extensions/dbscan/DBSCANExtension.java"/>
-                <move file="tmp/TestNetLogoDBSCAN.bak" tofile="src/test/java/org/nlogo/extensions/dbscan/TestNetLogoDBSCAN.java"/>
                 <move file="tmp/manifest.bak" tofile="src/main/resources/manifest.txt"/>
               </tasks>
             </configuration>
@@ -79,39 +95,12 @@
         </executions>
         <configuration>
           <includes>
-            <include>${basedir}/src/main/java/org/nlogo/extensions/dbscan/DBSCANExtension.java</include>
-            <include>${basedir}/src/test/java/org/nlogo/extensions/dbscan/TestNetLogoDBSCAN.java</include>
             <include>${basedir}/src/main/resources/manifest.txt</include>
           </includes>
           <replacements>
             <replacement>
-              <token>import org.nlogo.core.LogoList;</token>
-              <value>import org.nlogo.api.LogoList;</value>
-            </replacement>
-            <replacement>
-              <token>NetLogo-Extension-API-Version: 5.0</token>
+              <token>((NetLogo-Extension-API-Version:)(.)*)</token>
               <value>NetLogo-Extension-API-Version: 6.0</value>
-            </replacement>
-            <replacement>
-              <token>import org.nlogo.api.DefaultReporter;</token>
-              <value>import org.nlogo.api.Reporter;</value> 
-            </replacement>
-            <replacement>
-              <token>import org.nlogo.api.Syntax;</token>
-              <value>import org.nlogo.core.Syntax;
-import org.nlogo.core.SyntaxJ;</value>
-            </replacement>
-            <replacement>
-              <token>Syntax.reporterSyntax</token>
-              <value>SyntaxJ.reporterSyntax</value>
-            </replacement>
-            <replacement>
-              <token>extends DefaultReporter</token>
-              <value>implements Reporter</value>
-            </replacement>
-            <replacement>
-              <token>java-netlogo-clustering-test-v5.nlogo</token>
-              <value>java-netlogo-clustering-test-v6.nlogo</value>
             </replacement>
           </replacements>
         </configuration>
