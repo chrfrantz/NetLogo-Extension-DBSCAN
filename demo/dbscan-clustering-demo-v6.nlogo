@@ -4,7 +4,7 @@
 ;
 ; Author: Christopher Frantz (cf@christopherfrantz.org)
 ;
-; Last update: 25/05/2019
+; Last update: 28/05/2019
 ;
 ; For documentation and details about supported NetLogo versions refer to
 ; https://github.com/chrfrantz/NetLogo-Extension-DBSCAN#readme
@@ -256,7 +256,7 @@ HORIZONTAL
 @#$#@#$#@
 ## WHAT IS IT?
 
-This model demontrates the use of the DBSCAN extension. It highlights both clustering by variable as well as location.
+This model demontrates the use of the DBSCAN extension. It highlights clustering of individuals/turtles and patches by both variables as well as location.
 
 ## HOW IT WORKS
 
@@ -264,13 +264,15 @@ For variable-based clustering, individuals are clustered based on the value diff
 
 For location-based clustering, individuals are clustered based on their proximity.
 
+For variable-based clustering of patches (as opposed to individuals), patches are clustered based on resource level.
+
 ## HOW TO USE IT
 
 Click either button and observe how the clustering works both for variable-based clustering and location-based clustering.
 
 ## THINGS TO TRY
 
-Try varying the permissive distance (i.e. wealth difference levels for variable-based clustering, and spatial distance for location-based clustering) as well as the number of members required to form a cluster.
+Try varying the permissive distance (i.e., wealth difference levels for variable-based clustering, and spatial distance for location-based clustering) as well as the number of members required to form a cluster.
 
 ## NETLOGO FEATURES
 

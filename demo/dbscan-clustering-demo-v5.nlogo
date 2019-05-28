@@ -2,12 +2,14 @@
 ; Demonstration Model for DBSCAN extension for NetLogo (version 5).
 ; For the use with NetLogo version 6 onwards, check dbscan-clustering-demo-v6.nlogo.
 ;
-; Note: NetLogo 5 is only supported up to version 0.2.1 of the extension. Version 0.3
-;       onwards only supports NetLogo 6 or higher.
+; Note: NetLogo 6 or higher supports all features of the extension (clustering of individuals and patches).
+;       For NetLogo 5 this extension does only allow clustering of individuals by variable and location,
+;       but not clustering of patches by variable.
+;
 ;
 ; Author: Christopher Frantz (cf@christopherfrantz.org)
 ;
-; Last update: 25/05/2019
+; Last update: 28/05/2019
 ;
 ; For documentation and details about supported NetLogo versions refer to
 ; https://github.com/chrfrantz/NetLogo-Extension-DBSCAN#readme
