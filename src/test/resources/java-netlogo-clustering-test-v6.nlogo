@@ -1,3 +1,8 @@
+; This NetLogo model accompanies the DBSCAN extension JUnit tests.
+; It is not meant for independent use.
+; For more details about the DBSCAN extension visit
+; https://github.com/chrfrantz/NetLogo-Extension-DBSCAN#readme
+
 extensions [dbscan]
 
 globals [

@@ -1,12 +1,15 @@
 ;
-; Demonstration Model for DBSCAN extension for NetLogo (version 5). 
+; Demonstration Model for DBSCAN extension for NetLogo (version 5).
 ; For the use with NetLogo version 6 onwards, check dbscan-clustering-demo-v6.nlogo.
 ;
+; Note: NetLogo 5 is only supported up to version 0.2.1 of the extension. Version 0.3
+;       onwards only supports NetLogo 6 or higher.
+;
 ; Author: Christopher Frantz (cf@christopherfrantz.org)
-; 
+;
 ; Last update: 25/05/2019
 ;
-; For documentation and details about supported NetLogo versions refer to 
+; For documentation and details about supported NetLogo versions refer to
 ; https://github.com/chrfrantz/NetLogo-Extension-DBSCAN#readme
 ;
 
