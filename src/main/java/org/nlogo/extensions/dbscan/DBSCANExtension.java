@@ -48,7 +48,7 @@ public class DBSCANExtension extends DefaultClassManager {
 
         @Override
         public Syntax getSyntax() {
-            //Inputs: values to be clustered, property to be clustered on, minimum number of elements, maximum distance
+            // Inputs: values to be clustered, property to be clustered on, minimum number of elements, maximum distance
             int[] input = new int[] {Syntax.AgentsetType(), Syntax.StringType(), Syntax.NumberType(), Syntax.NumberType()}; 
             int ret = Syntax.ListType();
             return SyntaxJ.reporterSyntax(input, ret);
@@ -73,11 +73,11 @@ public class DBSCANExtension extends DefaultClassManager {
             }
             
             if (inputValues == null || inputValues.isEmpty()) {
-            	throw new ExtensionException(DBSCANExtensionErrors.ERROR_MISSING_INPUT_DATA);
+                throw new ExtensionException(DBSCANExtensionErrors.ERROR_MISSING_INPUT_DATA);
             }
 
             if (field == null || field.isEmpty()) {
-            	throw new ExtensionException(DBSCANExtensionErrors.ERROR_MISSING_CLUSTER_VARIABLE);
+                throw new ExtensionException(DBSCANExtensionErrors.ERROR_MISSING_CLUSTER_VARIABLE);
             }
             
             if (minNumberOfElements == -1) {
@@ -94,19 +94,28 @@ public class DBSCANExtension extends DefaultClassManager {
             // Check for patches
             boolean patches = false;
             int fieldIndex = -1;
-            Object first = it.hasNext() ? it.next() : null;            
+            Object first = it.hasNext() ? it.next() : null;
             if (first.getClass().equals(Patch.class)) {
-        		patches = true;
-        		fieldIndex = ctx.world().program().patchesOwn().toList().indexOf(field.toUpperCase());
-        		if (fieldIndex == -1) {
-        			throw new ExtensionException(DBSCANExtensionErrors.errorVariableCouldNotBeFound(field.toUpperCase()));
-        		}
+                patches = true;
+                // if you modify the assignment of fieldIndex (and want to maintain NetLogo 5 compatibility), 
+                // review the corresponding token in the maven-replacer plugin in pom-v5.xml
+                fieldIndex = ctx.world().program().patchesOwn().toList().indexOf(field.toUpperCase());
+                if (fieldIndex <= -1) {
+                    switch (fieldIndex) {
+                        // Default return value if not found
+                        case -1: throw new ExtensionException(DBSCANExtensionErrors.errorVariableCouldNotBeFound(field.toUpperCase()));
+                        // Consider indicative for NetLogo 5. fieldIndex will be modified accordingly in build process
+                        case -2: throw new ExtensionException(DBSCANExtensionErrors.ERROR_CLUSTER_PATCHES_NOT_SUPPORTED_IN_NETLOGO_5);
+                        // should never happen, but let's deal with it gracefully
+                        default: throw new ExtensionException(DBSCANExtensionErrors.errorVariableCouldNotBeFound(field.toUpperCase()));
+                    }
+                }
             }
             
-        	// Add all agents/patches (including first element) to collection
+            // Add all agents/patches (including first element) to collection
             Collection<Agent> inputCollection = new ArrayList<>();
             inputCollection.add((Agent)first);
-        	while (it.hasNext()) {
+            while (it.hasNext()) {
                 inputCollection.add((Agent) it.next());
             }
 
@@ -115,12 +124,12 @@ public class DBSCANExtension extends DefaultClassManager {
 
             try {
                 DBSCANClusterer<Agent> clusterer = new DBSCANClusterer<Agent>(
-                		inputCollection, minNumberOfElements, maxDistance, 
-                		(patches ?               			
-                			// For patches, use patch-specific access methods ...
-                			new DistanceMetricNetLogoPatchVariable(fieldIndex) : 
-                			// ... treat all others as non-patch agents. 
-                			new DistanceMetricNetLogoAgentVariable(field.toUpperCase()))); 
+                        inputCollection, minNumberOfElements, maxDistance, 
+                        (patches ? 
+                            // For patches, use patch-specific access methods 
+                            new DistanceMetricNetLogoPatchVariable(fieldIndex) : 
+                            // ... treat all others as non-patch agents. 
+                            new DistanceMetricNetLogoAgentVariable(field.toUpperCase()))); 
                 tmpList = clusterer.performClustering();
             } catch (DBSCANClusteringException e) {
                 throw new ExtensionException(e);
@@ -136,7 +145,7 @@ public class DBSCANExtension extends DefaultClassManager {
                 }
                 list.add(internalBuilder.toLogoList());
             }
-            return list.toLogoList();   
+            return list.toLogoList();
         }
     }
 
@@ -150,8 +159,8 @@ public class DBSCANExtension extends DefaultClassManager {
 
         @Override
         public Syntax getSyntax() {
-            //Inputs: values to be clustered, minimum number of elements, maximum distance
-            int[] input = new int[] {Syntax.AgentsetType(), Syntax.NumberType(), Syntax.NumberType()}; 
+            // Inputs: values to be clustered, minimum number of elements, maximum distance
+            int[] input = new int[] {Syntax.AgentsetType(), Syntax.NumberType(), Syntax.NumberType()};
             int ret = Syntax.ListType();
             return SyntaxJ.reporterSyntax(input, ret);
         }
@@ -173,7 +182,7 @@ public class DBSCANExtension extends DefaultClassManager {
             }
             
             if (inputValues == null || inputValues.isEmpty()) {
-            	throw new ExtensionException(DBSCANExtensionErrors.ERROR_MISSING_INPUT_DATA);
+                throw new ExtensionException(DBSCANExtensionErrors.ERROR_MISSING_INPUT_DATA);
             }
 
             if (minNumberOfElements == -1) {
@@ -189,37 +198,29 @@ public class DBSCANExtension extends DefaultClassManager {
             
             // Check for patches
             boolean patches = false;
-            Object first = it.hasNext() ? it.next() : null;            
+            Object first = it.hasNext() ? it.next() : null;
             if (first.getClass().equals(Patch.class)) {
-        		patches = true;
+                patches = true;
             }
             
             // Add all agents/patches (including first element) to collection
             Collection<org.nlogo.api.Agent> inputCollection = new ArrayList<>();
             inputCollection.add((org.nlogo.api.Agent)first);
-        	while (it.hasNext()) {
-                inputCollection.add((org.nlogo.api.Agent) it.next());
-            }
-            
-            /*
-            // Convert input AgentSet to Collection
-            Collection<org.nlogo.api.Agent> inputCollection = new ArrayList<>();
-            Iterator<?> it = inputValues.agents().iterator();
             while (it.hasNext()) {
                 inputCollection.add((org.nlogo.api.Agent) it.next());
-            }*/
+            }
 
             // Perform clustering
             ArrayList<ArrayList<org.nlogo.api.Agent>> tmpList = null;
 
             try {
                 DBSCANClusterer<org.nlogo.api.Agent> clusterer = new DBSCANClusterer<org.nlogo.api.Agent>(
-                		inputCollection, minNumberOfElements, maxDistance, 
-                		( patches ?
-                			// For patches, use patch-specific coordinate fields ...
-                			new DistanceMetricNetLogoPatchLocation() :
-                			// ... treat all others as non-patch agents.	
-                			new DistanceMetricNetLogoAgentLocation())); 
+                        inputCollection, minNumberOfElements, maxDistance, 
+                        ( patches ? 
+                            // For patches, use patch-specific coordinate fields 
+                            new DistanceMetricNetLogoPatchLocation() :
+                            // ... treat all others as non-patch agents.
+                            new DistanceMetricNetLogoAgentLocation())); 
                 tmpList = clusterer.performClustering();
             } catch (DBSCANClusteringException e) {
                 throw new ExtensionException(e);
