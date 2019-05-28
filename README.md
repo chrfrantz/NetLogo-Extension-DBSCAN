@@ -149,9 +149,9 @@ The preferred deployment variant is simply to use the auto-installation feature 
 
 ### Variant 0 (requires NetLogo 6.1.0 or higher): Auto-Installation
 
-To trigger the installation, simply add `extensions [dbscan]` at the top of your model file. NetLogo will then prompt you to confirm the installation of the extension. The installed extension will appear in the Extension Manager. For more details about the Extension Manager, see its official [documentation](http://ccl.northwestern.edu/netlogo/docs/extension-manager.html).
+To trigger the installation, simply add `extensions [dbscan]` at the top of your model code and click on the `Check` button in the editor. NetLogo will then prompt you to confirm the installation of the extension and you can immediately use it in your code. You can manage the installed extension in the Extension Manager. For more details about the Extension Manager, see its official [documentation](http://ccl.northwestern.edu/netlogo/docs/extension-manager.html).
 
-### Variant 1 (requires NetLogo 6.1.0 or higher): Installation via NetLogo Extension Manager
+### Variant 1 (requires NetLogo 6.1.0 or higher): Manual Installation via NetLogo Extension Manager
 
 Use the Extension Manager provided by NetLogo by selecting `Tools` in the menu bar, followed by `Extensions ...`. In the dialog, scroll down to the extension `DBSCAN` and click `Install`. For more details about the Extension Manager, see its official [documentation](http://ccl.northwestern.edu/netlogo/docs/extension-manager.html).
 
