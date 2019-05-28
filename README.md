@@ -5,7 +5,7 @@ It allows you to perform unsupervised density-based clustering based on specifie
 
 ## Usage
 
-The extension contains two reporters, `cluster-by-variable` and `cluster-by-location`.
+The extension contains two reporters, `cluster-by-variable` and `cluster-by-location` that support the clustering of individuals and patches.
 
 ### Clustering individuals by variable
 
@@ -106,7 +106,7 @@ let ctr 1
     set ctr (ctr + 1) ])
 ```
 
-### Clustering by location
+### Clustering individuals by location
 
 (since version 0.1)
 
