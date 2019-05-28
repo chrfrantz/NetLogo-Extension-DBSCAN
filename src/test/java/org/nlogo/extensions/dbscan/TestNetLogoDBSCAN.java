@@ -40,17 +40,17 @@ import org.nlogo.headless.HeadlessWorkspace;
  */
 
 public class TestNetLogoDBSCAN {
-	
-	/**
-	 * Test model used by all tests
-	 */
-	public static final String TESTMODEL = System.getProperty("user.dir")
+    
+    /**
+     * Test model used by all tests
+     */
+    public static final String TESTMODEL = System.getProperty("user.dir")
             + "/src/test/resources/java-netlogo-clustering-test-v6.nlogo";
-	
-	/**
-	 * Produces additional output helpful for debugging tests.
-	 */
-	public static final boolean debugOutput = false;
+    
+    /**
+     * Produces additional output helpful for debugging tests.
+     */
+    public static final boolean debugOutput = false;
 
     @Test
     public void testClusteringOfTurtlesByVariablesInExistingNetLogoModelFromJava() {
@@ -94,14 +94,14 @@ public class TestNetLogoDBSCAN {
             }
 
             if (debugOutput) {
-            	System.out.print("ID: " + t.id() + ", Wealth: ");
+                System.out.print("ID: " + t.id() + ", Wealth: ");
             }
 
             try {
-            	Object obj = t.getBreedVariable(VARIABLE);
-            	if (debugOutput) {
-            		System.out.println(obj);
-            	}
+                Object obj = t.getBreedVariable(VARIABLE);
+                if (debugOutput) {
+                System.out.println(obj);
+                }
             } catch (AgentException e) {
                 fail("Exception when attempting to retrieve agent cluster variable value: " + e);
             }
@@ -125,15 +125,16 @@ public class TestNetLogoDBSCAN {
         LogoList res = LogoList.fromJava(result);
 
         if (debugOutput) {
-        	System.out.println("Resulting clusters: " + res);
+            System.out.println("Resulting clusters: " + res);
         }
 
         assertEquals("Number of Clusters equals", 12, res.size());
     }
-    
+
     @Test
     public void testClusteringOfTurtlesByVariablesInExistingNetLogoModelFromJavaWithUnknownClusteringVariable() {
-    	Random random = new Random(4522);
+
+        Random random = new Random(4522);
 
         final String AGENTS = "AGENTS";
         final String VARIABLE = "WEALTH";
@@ -172,14 +173,14 @@ public class TestNetLogoDBSCAN {
             }
 
             if (debugOutput) {
-            	System.out.print("ID: " + t.id() + ", Wealth: ");
+                System.out.print("ID: " + t.id() + ", Wealth: ");
             }
 
             try {
-            	Object obj = t.getBreedVariable(VARIABLE);
-            	if (debugOutput) {
-            		System.out.println(obj);
-            	}
+                Object obj = t.getBreedVariable(VARIABLE);
+                if (debugOutput) {
+                    System.out.println(obj);
+                }
             } catch (AgentException e) {
                 fail("Exception when attempting to retrieve agent cluster variable value: " + e);
             }
@@ -195,12 +196,12 @@ public class TestNetLogoDBSCAN {
             DBSCANClusterer<Agent> clusterer = new DBSCANClusterer<Agent>(l2, minCluster, maxDistance, new DistanceMetricNetLogoAgentVariable(VARIABLE + "2"));
             //result = clusterer.performClustering();
         } catch (DBSCANClusteringException e) {
-        	assertEquals("Execution fails due to incorrect turtle variable name",
-        			"org.christopherfrantz.dbscan.DBSCANClusteringException: AGENTS breed does not own variable WEALTH2", 
-        			e.getMessage());
+            assertEquals("Execution fails due to incorrect turtle variable name",
+                    "org.christopherfrantz.dbscan.DBSCANClusteringException: AGENTS breed does not own variable WEALTH2", 
+                    e.getMessage());
         }
     }
-    
+
     @Test
     public void testClusteringOfPatchesByVariablesInExistingNetLogoModelFromJava() {
 
@@ -226,24 +227,24 @@ public class TestNetLogoDBSCAN {
         
         ArrayList<Agent> clusterInput = new ArrayList<>();
         for (int i = 0; i < world.patches().count(); i++) {
-        	try {
-				world.patches().getByIndex(i).setPatchVariable(variableIdx, new Integer(random.nextInt(1500)));
-			} catch (AgentException e) {
-				fail("Exception thrown while setting up patch variable: " + e);
-			}
-        	clusterInput.add(world.patches().getByIndex(i));
+            try {
+                world.patches().getByIndex(i).setPatchVariable(variableIdx, new Integer(random.nextInt(1500)));
+            } catch (AgentException e) {
+                fail("Exception thrown while setting up patch variable: " + e);
+            }
+            clusterInput.add(world.patches().getByIndex(i));
         }
         
         // Debug output
         if (debugOutput) {
-	        System.out.println("Input: ");
-	        clusterInput.forEach(elem -> {
-				try {
-					System.out.println("Patch " + elem.toString() + ": " + elem.getPatchVariable(variableIdx).toString());
-				} catch (AgentException e1) {
-					fail("Exception when iterating over patches and accessing cluster variable: " + e1);
-				}
-			});
+            System.out.println("Input: ");
+            clusterInput.forEach(elem -> {
+                try {
+                    System.out.println("Patch " + elem.toString() + ": " + elem.getPatchVariable(variableIdx).toString());
+                } catch (AgentException e1) {
+                    fail("Exception when iterating over patches and accessing cluster variable: " + e1);
+                }
+            });
         }
         
         assertEquals("Input patches successfully retrieved", 289, clusterInput.size());
@@ -264,17 +265,17 @@ public class TestNetLogoDBSCAN {
         LogoList res = LogoList.fromJava(result);
 
         if (debugOutput) {
-	        System.out.println("Resulting clusters: " + res);
-	        System.out.println("Clusters count: " + res.size());
+            System.out.println("Resulting clusters: " + res);
+            System.out.println("Clusters count: " + res.size());
         }
 
         assertEquals("Number of Clusters equals", 48, res.size());
     }
-    
+
     @Test
     public void testClusteringOfPatchesByVariablesInExistingNetLogoModelFromJavaWithUnknownClusteringVariable() {
-    	
-    	Random random = new Random(4522);
+        
+        Random random = new Random(4522);
 
         HeadlessWorkspace ws = HeadlessWorkspace.newInstance();
 
@@ -296,24 +297,24 @@ public class TestNetLogoDBSCAN {
         
         ArrayList<Agent> clusterInput = new ArrayList<>();
         for (int i = 0; i < world.patches().count(); i++) {
-        	try {
-				world.patches().getByIndex(i).setPatchVariable(variableIdx, new Integer(random.nextInt(1500)));
-			} catch (AgentException e) {
-				fail("Exception thrown while setting up patch variable: " + e);
-			}
-        	clusterInput.add(world.patches().getByIndex(i));
+            try {
+                world.patches().getByIndex(i).setPatchVariable(variableIdx, new Integer(random.nextInt(1500)));
+            } catch (AgentException e) {
+                fail("Exception thrown while setting up patch variable: " + e);
+            }
+            clusterInput.add(world.patches().getByIndex(i));
         }
         
         // Debug output
         if (debugOutput) {
-	        System.out.println("Input: ");
-	        clusterInput.forEach(elem -> {
-				try {
-					System.out.println("Patch " + elem.toString() + ": " + elem.getPatchVariable(variableIdx).toString());
-				} catch (AgentException e1) {
-					fail("Exception when iterating over patches and accessing cluster variable: " + e1);
-				}
-			});
+            System.out.println("Input: ");
+            clusterInput.forEach(elem -> {
+                try {
+                    System.out.println("Patch " + elem.toString() + ": " + elem.getPatchVariable(variableIdx).toString());
+                } catch (AgentException e1) {
+                    fail("Exception when iterating over patches and accessing cluster variable: " + e1);
+                }
+            });
         }
         
         assertEquals("Input patches successfully retrieved", 289, clusterInput.size());
@@ -323,176 +324,167 @@ public class TestNetLogoDBSCAN {
         double maxDistance = 5;
 
         try {
-        	// Initialise with invalid variable index
+            // Initialise with invalid variable index
             DBSCANClusterer<Agent> clusterer = new DBSCANClusterer<Agent>(clusterInput, minCluster, maxDistance, new DistanceMetricNetLogoPatchVariable(variableIdx + 1));
         } catch (DBSCANClusteringException e) {
-        	assertEquals("Execution fails due to incorrect patch variable index",
-        			"java.lang.ArrayIndexOutOfBoundsException when accessing patch variable 6. Message: 6", 
-        			e.getMessage());
+            assertEquals("Execution fails due to incorrect patch variable index",
+                    "java.lang.ArrayIndexOutOfBoundsException when accessing patch variable 6. Message: 6", 
+                    e.getMessage());
         }
     }
-    
+
     @Test
     public void testClusteringOfTurtlesByLocationInExistingNetLogoModelHeadless() {
-    	HeadlessWorkspace workspace =
-    			HeadlessWorkspace.newInstance() ;
-    		    try {
-    		      // Load model
-    		      workspace.open(TESTMODEL, false);
-    		      // Parametrise agent numbers
-    		      workspace.command("pre-setup");
-    		      // Setting up entities
-    		      workspace.command("setup");
-    		      // Run clustering
-    		      workspace.command("set clusters dbscan:cluster-by-location agents 3 3");
-    		      if (debugOutput) {
-	    		      // Print clusters
-	    		      System.out.println(
-	    		    			workspace.report("length clusters"));
-    		      }
-    		      assertEquals("Number of clusters expected", 7.0, workspace.report("length clusters"));
-    		      workspace.dispose();
-    		    }
-    		    catch(Exception ex) {
-    		      fail("Clustering was not successful (but should have been). Exception: " + ex.getMessage());
-    		    }
+        HeadlessWorkspace workspace =
+                HeadlessWorkspace.newInstance() ;
+                try {
+                  // Load model
+                  workspace.open(TESTMODEL, false);
+                  // Parametrise agent numbers
+                  workspace.command("pre-setup");
+                  // Setting up entities
+                  workspace.command("setup");
+                  // Run clustering
+                  workspace.command("set clusters dbscan:cluster-by-location agents 3 3");
+                  if (debugOutput) {
+                      // Print clusters
+                      System.out.println(workspace.report("length clusters"));
+                  }
+                  assertEquals("Number of clusters expected", 7.0, workspace.report("length clusters"));
+                  workspace.dispose();
+                }
+                catch(Exception ex) {
+              fail("Clustering was not successful (but should have been). Exception: " + ex.getMessage());
+            }
     }
-    
+
     @Test
     public void testClusteringOfTurtlesByLocationInExistingNetLogoModelHeadlessMissingInput() {
-    	HeadlessWorkspace workspace =
-    			HeadlessWorkspace.newInstance() ;
-    		    try {
-    		      // Load model
-    		      workspace.open(TESTMODEL, false);
-    		      // Setting up entities
-    		      workspace.command("setup");
-    		      // Run clustering with empty agent input set
-    		      workspace.command("set clusters dbscan:cluster-by-location agents 3 3");
-    		      workspace.dispose();
-    		    }
-    		    catch(Exception ex) {
-    		      assertEquals("Invalid input data", 
-    		    		  "Extension exception: Clustering input data (e.g., turtles, patches) has not been provided (or is empty).", 
-    		    		  ex.getMessage());
-    		    }
+        HeadlessWorkspace workspace =
+                HeadlessWorkspace.newInstance() ;
+                try {
+                  // Load model
+                  workspace.open(TESTMODEL, false);
+                  // Setting up entities
+                  workspace.command("setup");
+                  // Run clustering with empty agent input set
+                  workspace.command("set clusters dbscan:cluster-by-location agents 3 3");
+                  workspace.dispose();
+                }
+                catch(Exception ex) {
+                  assertEquals("Invalid input data", 
+                          "Extension exception: Clustering input data (e.g., turtles, patches) has not been provided (or is empty).", 
+                          ex.getMessage());
+                }
     }
-    
-    
+
     @Test
     public void testClusteringOfTurtlesByLocationInExistingNetLogoModelHeadlessMissingHyperParameters() {
-    	HeadlessWorkspace workspace =
-    			HeadlessWorkspace.newInstance() ;
-    		    try {
-    		      // Load model
-    		      workspace.open(TESTMODEL, false);
-    		      // Initialise agents
-    		      workspace.command("setup");
-    		      // Run clustering without specifying hyperparameters
-    		      workspace.command("set clusters dbscan:cluster-by-location agents");
-    		      workspace.dispose();
-    		    }
-    		    catch(Exception ex) {
-    		      assertEquals("Invalid input data", 
-    		    		  "DBSCAN:CLUSTER-BY-LOCATION expected 3 inputs, an agentset, a number and a number.", 
-    		    		  ex.getMessage());
-    		    }
+        HeadlessWorkspace workspace =
+                HeadlessWorkspace.newInstance() ;
+                try {
+                  // Load model
+                  workspace.open(TESTMODEL, false);
+                  // Initialise agents
+                  workspace.command("setup");
+                  // Run clustering without specifying hyperparameters
+                  workspace.command("set clusters dbscan:cluster-by-location agents");
+                  workspace.dispose();
+                }
+                catch(Exception ex) {
+                  assertEquals("Invalid input data", 
+                          "DBSCAN:CLUSTER-BY-LOCATION expected 3 inputs, an agentset, a number and a number.", 
+                          ex.getMessage());
+                }
     }
-    
+
     @Test
     public void testClusteringOfTurtlesByVariablesInExistingNetLogoModelHeadlessMissingClusterVariable() {
-    	HeadlessWorkspace workspace =
-    			HeadlessWorkspace.newInstance() ;
-    		    try {
-    		      // Load model
-    		      workspace.open(TESTMODEL, false);
-    		      // Parametrise agent numbers
-    		      workspace.command("pre-setup");
-    		      // Setting up entities
-    		      workspace.command("setup");
-    		      // Run clustering
-    		      workspace.command("set clusters dbscan:cluster-by-variable agents 3 2");
-    		      if (debugOutput) {
-	    		      // Print clusters
-	    		      System.out.println(
-	    		    			workspace.report("length clusters"));
-    		      }
-    		      assertEquals("Number of clusters expected", 5.0, workspace.report("length clusters"));
-    		      workspace.dispose();
-    		    }
-    		    catch(Exception ex) {
-    		      assertEquals("Indicate parameter signature for cluster-by-variable", "DBSCAN:CLUSTER-BY-VARIABLE expected 4 inputs, an agentset, a string, a number and a number.", ex.getMessage());
-    		    }
+        HeadlessWorkspace workspace =
+                HeadlessWorkspace.newInstance() ;
+                try {
+                  // Load model
+                  workspace.open(TESTMODEL, false);
+                  // Parametrise agent numbers
+                  workspace.command("pre-setup");
+                  // Setting up entities
+                  workspace.command("setup");
+                  // Run clustering
+                  workspace.command("set clusters dbscan:cluster-by-variable agents 3 2");
+                  if (debugOutput) {
+                      // Print clusters
+                      System.out.println(workspace.report("length clusters"));
+                  }
+                  assertEquals("Number of clusters expected", 5.0, workspace.report("length clusters"));
+                  workspace.dispose();
+                }
+                catch(Exception ex) {
+                  assertEquals("Indicate parameter signature for cluster-by-variable", "DBSCAN:CLUSTER-BY-VARIABLE expected 4 inputs, an agentset, a string, a number and a number.", ex.getMessage());
+                }
     }
-    
+
     @Test
     public void testClusteringOfTurtlesByVariablesInExistingNetLogoModelHeadless() {
-    	HeadlessWorkspace workspace =
-    			HeadlessWorkspace.newInstance() ;
-    		    try {
-    		      // Load model
-    		      workspace.open(TESTMODEL, false);
-    		      // Parametrise agent numbers
-    		      workspace.command("pre-setup");
-    		      // Setting up entities
-    		      workspace.command("setup");
-    		      // Run clustering
-    		      workspace.command("set clusters dbscan:cluster-by-variable agents \"wealth\" 3 2");
-    		      if (debugOutput) {
-	    		      // Print clusters
-	    		      System.out.println(
-	    		    			workspace.report("length clusters"));
-    		      }
-    		      assertEquals("Number of clusters expected", 5.0, workspace.report("length clusters"));
-    		      workspace.dispose();
-    		    }
-    		    catch(Exception ex) {
-    		      fail("Clustering was not successful (but should have been). Exception: " + ex.getMessage());
-    		    }
+        HeadlessWorkspace workspace =
+                HeadlessWorkspace.newInstance() ;
+                try {
+                  // Load model
+                  workspace.open(TESTMODEL, false);
+                  // Parametrise agent numbers
+                  workspace.command("pre-setup");
+                  // Setting up entities
+                  workspace.command("setup");
+                  // Run clustering
+                  workspace.command("set clusters dbscan:cluster-by-variable agents \"wealth\" 3 2");
+                  if (debugOutput) {
+                      // Print clusters
+                      System.out.println(workspace.report("length clusters"));
+                  }
+                  assertEquals("Number of clusters expected", 5.0, workspace.report("length clusters"));
+                  workspace.dispose();
+                }
+                catch(Exception ex) {
+                  fail("Clustering was not successful (but should have been). Exception: " + ex.getMessage());
+                }
     }
-    
+
     @Test
     public void testClusteringOfTurtlesByVariablesInExistingNetLogoModelHeadlessMissingInput() {
-    	HeadlessWorkspace workspace =
-    			HeadlessWorkspace.newInstance() ;
-    		    try {
-    		      // Load model
-    		      workspace.open(TESTMODEL, false);
-    		      // Setting up entities
-    		      workspace.command("setup");
-    		      // Run clustering with empty agent input set
-    		      workspace.command("set clusters dbscan:cluster-by-variable agents \"wealth\" 3 3");
-    		      workspace.dispose();
-    		    }
-    		    catch(Exception ex) {
-    		      assertEquals("Invalid input data", 
-    		    		  "Extension exception: Clustering input data (e.g., turtles, patches) has not been provided (or is empty).", 
-    		    		  ex.getMessage());
-    		    }
+        HeadlessWorkspace workspace =
+                HeadlessWorkspace.newInstance() ;
+                try {
+                  // Load model
+                  workspace.open(TESTMODEL, false);
+                  // Setting up entities
+                  workspace.command("setup");
+                  // Run clustering with empty agent input set
+                  workspace.command("set clusters dbscan:cluster-by-variable agents \"wealth\" 3 3");
+                  workspace.dispose();
+                }
+                catch(Exception ex) {
+                  assertEquals("Invalid input data", 
+                          "Extension exception: Clustering input data (e.g., turtles, patches) has not been provided (or is empty).", 
+                          ex.getMessage());
+                }
     }
-    
-    
+
     @Test
     public void testClusteringOfTurtlesByVariablesInExistingNetLogoModelHeadlessMissingHyperParameters() {
-    	HeadlessWorkspace workspace =
-    			HeadlessWorkspace.newInstance() ;
-    		    try {
-    		      // Load model
-    		      workspace.open(TESTMODEL, false);
-    		      // Initialise agents
-    		      workspace.command("setup");
-    		      // Run clustering without specifying hyperparameters
-    		      workspace.command("set clusters dbscan:cluster-by-variable agents \"wealth\"");
-    		      workspace.dispose();
-    		    }
-    		    catch(Exception ex) {
-    		      assertEquals("Invalid input data", 
-    		    		  "DBSCAN:CLUSTER-BY-VARIABLE expected 4 inputs, an agentset, a string, a number and a number.", 
-    		    		  ex.getMessage());
-    		    }
+        HeadlessWorkspace workspace =
+                HeadlessWorkspace.newInstance() ;
+                try {
+                  // Load model
+                  workspace.open(TESTMODEL, false);
+                  // Initialise agents
+                  workspace.command("setup");
+                  // Run clustering without specifying hyperparameters
+                  workspace.command("set clusters dbscan:cluster-by-variable agents \"wealth\"");
+                  workspace.dispose();
+                }
+                catch(Exception ex) {
+                  assertEquals("Invalid input data", 
+                          "DBSCAN:CLUSTER-BY-VARIABLE expected 4 inputs, an agentset, a string, a number and a number.", 
+                          ex.getMessage());
+                }
     }
-    
-    
-    
-    
 }
