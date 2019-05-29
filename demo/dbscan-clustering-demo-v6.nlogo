@@ -304,7 +304,7 @@ Click either button and observe how the clustering works both for variable-based
 
 ## THINGS TO TRY
 
-Try varying the maximum distance (slider 'max-distance-agents') to see how agents are clustered by variable for different wealth ranges (button 'cluster-agents-by-variable').  The same slider is also used for the maximum permissible distance between agents if performing location-based clustering (button 'cluster-agents-by-location'). In addition, try out the clustering of patches by different resource levels (slider 'max-distance-patches') using the button 'patches-by-variable'. You can further vary the number of members (i.e., agents or patches) to form a cluster and see how this changes the emerging clusters.
+Try varying the maximum distance (slider 'max-distance-agents') to see how agents are clustered by variable for different wealth ranges (button 'cluster-agents-by-variable').  The same slider is also used for the maximum permissible distance between agents if performing location-based clustering (button 'cluster-agents-by-location'). In addition, try out the clustering of patches by different resource levels (slider 'max-distance-patches') using the button 'cluster-patches-by-variable'. You can further vary the number of members (i.e., agents or patches) necessary to form a cluster and see how this changes the emerging clusters.
 
 ## NETLOGO FEATURES
 
