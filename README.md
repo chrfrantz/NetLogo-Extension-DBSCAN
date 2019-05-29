@@ -133,15 +133,17 @@ The clusters can then be used as shown in the section **Clustering individuals b
 
 ## Demo
 
-For more comprehensive examples for both reporters, try out the demo that corresponds to your NetLogo version.
+For more comprehensive examples for the feature set, try out the demo that corresponds to your NetLogo version.
 
 * For NetLogo 5, use `demo/dbscan-clustering-demo-v5.nlogo`
 
 * For NetLogo 6 (and higher), use `demo/dbscan-clustering-demo-v6.nlogo` (Note that the NetLogo 6 demo model also includes an example for clustering patches.)
 
-Clustering agents by location should produce the following output (irrespective of NetLogo version).
+Clustering agents by location using any of the demo models should produce the following output (the cluster centroid is shown as a coloured patch).
 
 ![Location-based clustering demo output](https://github.com/chrfrantz/NetLogo-Extension-DBSCAN/raw/master/doc/ExampleLocationBasedClusteringOutput.png)
+
+For a screenshot of the entire demo GUI including control elements and further cluster-related information have a look [here](https://github.com/chrfrantz/NetLogo-Extension-DBSCAN/raw/master/docNetLogoDbscanDemoGui.png).
 
 ## Deployment
 
