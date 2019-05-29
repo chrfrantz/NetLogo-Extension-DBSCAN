@@ -8,7 +8,7 @@
   <packaging>pom</packaging>
 
   <repositories>
-  	<repository>
+    <repository>
       <id>mvnrepository.com</id>
       <url>https://mvnrepository.com</url>
     </repository>
@@ -16,7 +16,7 @@
       <id>jitpack.io</id>
       <url>https://jitpack.io</url>
     </repository>
-	<repository>
+    <repository>
       <id>in-project</id>
       <name>In Project Repo</name>
       <url>file://${project.basedir}/libs</url>

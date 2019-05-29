@@ -79,7 +79,7 @@
           </execution>
         </executions>
       </plugin>
-      <!-- Replacing syntax to accommodate NetLogo Extensions API v6 -->
+      <!-- Replacing syntax to accommodate NetLogo Extensions API v5 -->
       <plugin>
         <groupId>com.google.code.maven-replacer-plugin</groupId>
         <artifactId>replacer</artifactId>
