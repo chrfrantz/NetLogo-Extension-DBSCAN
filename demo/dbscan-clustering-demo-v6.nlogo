@@ -1,10 +1,10 @@
 ;
-; Demonstration Model for DBSCAN extension for NetLogo (version 6 onwards)
+; Demonstration Model for DBSCAN extension (v0.3) for NetLogo version 6 onwards.
 ; For the use with NetLogo version 5, check dbscan-clustering-demo-v5.nlogo.
 ;
 ; Author: Christopher Frantz (cf@christopherfrantz.org)
 ;
-; Last update: 28/05/2019
+; Last update: 29/05/2019
 ;
 ; For documentation and details about supported NetLogo versions refer to
 ; https://github.com/chrfrantz/NetLogo-Extension-DBSCAN#readme
@@ -19,7 +19,10 @@ globals [
 ]
 
 breed [ agents agt ]
+
+; Clustering variable for agents
 agents-own [ wealth ]
+; Clustering variable for patches
 patches-own [ resource ]
 
 to setup
@@ -31,18 +34,20 @@ to setup
   set min-wealth 10
   set max-wealth 100
 
+  ; Create agents
   create-agents num-agents
-  ; Setup for clustering agents by location or variable
+
+  ; Set up agents with location and cluster variable
   ask agents
     [
       setxy random-xcor random-ycor
       set wealth (max (list min-wealth (random max-wealth)) )
     ]
 
-  ; Setup for clustering patches by variable
+  ; Set up patches with clustering variable
   ask patches
     [
-      set resource one-of [50 100 200 500]
+      set resource one-of [50 70 100 150]
     ]
 end
 
@@ -56,19 +61,26 @@ to cluster-agents-by-variable
   output-print (word "Number of clusters: " (length clusters))
 
   ; Show clusters as returned by extension
-  output-print "Raw clusters:"
+  output-print "\nRaw clusters:"
   foreach clusters [ [x] -> output-print x ]
 
   ; Colour and label individual agents based on cluster
-  output-print "Clusters as AgentSets:"
+  output-print "\nClusters as AgentSets (and additional cluster information):"
   let ctr 1
   (foreach clusters (n-of (length clusters) base-colors)
     [ [ x y ] -> let aset turtles with [ member? self x ]
+
+      ; Set colour for all agents in cluster
       ask aset
         [ set color y
           set label (word "ID: " who ", Cluster: " ctr ", Wealth: " wealth) ]
-      ; Print agent sets
-      output-print (word "Cluster " ctr ": " aset)
+
+      ; Retrieve value ranges in cluster
+      let min-value min [ wealth ] of aset
+      let max-value max [ wealth ] of aset
+
+      ; Print agent cluster information
+      output-print (word "Cluster " ctr ": " aset " (Value range: " min-value " to " max-value ")")
       set ctr (ctr + 1) ])
 end
 
@@ -82,19 +94,30 @@ to cluster-agents-by-location
   output-print (word "Number of clusters: " (length clusters))
 
   ; Show clusters as returned by extension
-  output-print "Raw clusters:"
+  output-print "\nRaw clusters:"
   foreach clusters [ [x] -> output-print x ]
 
   ; Colour and label individual agents based on cluster
-  output-print "Clusters as AgentSets:"
+  output-print "\nClusters as AgentSets (and additional cluster information):"
   let ctr 1
   (foreach clusters (n-of (length clusters) base-colors)
     [ [ x y ] -> let aset turtles with [ member? self x ]
+
+      ; Set colour for all agents in cluster
       ask aset
         [ set color y
           set label (word "ID: " who ", Cluster: " ctr) ]
-      ; Print agent sets
-      output-print (word "Cluster " ctr ": " aset)
+
+      ; Retrieve cluster centroids
+      let mean-x-value round mean [ xcor ] of aset
+      let mean-y-value round mean [ ycor ] of aset
+
+      ; Colour centroid patch
+      ask patch mean-x-value mean-y-value
+        [ set pcolor y ]
+
+      ; Print agent cluster information
+      output-print (word "Cluster " ctr ": " aset " (Centroid: " mean-x-value "; " mean-y-value ")")
       set ctr (ctr + 1) ])
 end
 
@@ -108,18 +131,25 @@ to cluster-patches-by-variable
   output-print (word "Number of clusters: " (length clusters))
 
   ; Show clusters as returned by extension
-  output-print "Raw clusters:"
+  output-print "\nRaw clusters:"
   foreach clusters [ [x] -> output-print x ]
 
-  ; Colour and label individual agents based on cluster
-  output-print "Clusters as AgentSets:"
+  ; Colour individual patches based on cluster
+  output-print "\nClusters as AgentSets (and additional cluster information):"
   let ctr 1
   (foreach clusters (n-of (length clusters) base-colors)
     [ [ x y ] -> let aset patches with [ member? self x ]
+
+      ; Set colour for all patches in cluster
       ask aset
         [ set pcolor y ]
-      ; Print patch clusters
-      output-print (word "Cluster " ctr ": " aset)
+
+      ; Retrieve value ranges in cluster
+      let min-value min [ resource ] of aset
+      let max-value max [ resource ] of aset
+
+      ; Print patch cluster information
+      output-print (word "Cluster " ctr ": " aset " (Value range: " min-value " to " max-value ")")
       set ctr (ctr + 1) ])
 end
 @#$#@#$#@
@@ -154,7 +184,7 @@ OUTPUT
 14
 145
 491
-391
+400
 11
 
 BUTTON
@@ -245,9 +275,9 @@ SLIDER
 130
 maximum-distance-patches
 maximum-distance-patches
-0
-100
-43.0
+10
+50
+15.0
 1
 1
 NIL
@@ -256,27 +286,30 @@ HORIZONTAL
 @#$#@#$#@
 ## WHAT IS IT?
 
-This model demontrates the use of the DBSCAN extension. It highlights clustering of individuals/turtles and patches by both variables as well as location.
+This model demonstrates the use of the DBSCAN extension (https://github.com/chrfrantz/NetLogo-Extension-DBSCAN/). It highlights clustering of individuals/turtles and patches by both variables as well as location.
 
 ## HOW IT WORKS
 
-For variable-based clustering, individuals are clustered based on the value difference of their wealth levels.
+The DBSCAN algorithm clusters items based on value proximity (based on the maximum permissible distance and a minimum number of items to form a cluster). Unlike K-means it operates without specifying the number of expected clusters in advance, which makes it useful for exploration of unknown data (more details in the link at the bottom).
 
-For location-based clustering, individuals are clustered based on their proximity.
+For variable-based clustering of agents, individuals are clustered based on the value difference of their wealth levels and the minimum number of members required to form cluster.
 
-For variable-based clustering of patches (as opposed to individuals), patches are clustered based on resource level.
+For location-based clustering, individuals are clustered based on their proximity and the minimum number of members required to form cluster.
+
+For variable-based clustering of patches (as opposed to individuals), patches are clustered based on resource level and the minimum number of members required to form cluster.
 
 ## HOW TO USE IT
 
-Click either button and observe how the clustering works both for variable-based clustering and location-based clustering.
+Click either button and observe how the clustering works both for variable-based clustering of agents and patches works and location-based clustering (for agents - clustering patches by location doesn't make sense). Modify the sliders to affect the hyperparameters of the clustering algorithm (see description under 'THINGS TO TRY'). 
 
 ## THINGS TO TRY
 
-Try varying the permissive distance (i.e., wealth difference levels for variable-based clustering, and spatial distance for location-based clustering) as well as the number of members required to form a cluster.
+Try varying the maximum distance (slider 'max-distance-agents') to see how agents are clustered by variable for different wealth ranges (button 'cluster-agents-by-variable').  The same slider is also used for the maximum permissible distance between agents if performing location-based clustering (button 'cluster-agents-by-location'). In addition, try out the clustering of patches by different resource levels (slider 'max-distance-patches') using the button 'patches-by-variable'. You can further vary the number of members (i.e., agents or patches) to form a cluster and see how this changes the emerging clusters.
 
 ## NETLOGO FEATURES
 
-Note that this model relies on the DBSCAN extension found under https://github.com/chrfrantz/NetLogo-Extension-DBSCAN/
+This model relies on the DBSCAN extension. For more information about installation, use and examples, have a look at the README:
+https://github.com/chrfrantz/NetLogo-Extension-DBSCAN#readme
 @#$#@#$#@
 default
 true
