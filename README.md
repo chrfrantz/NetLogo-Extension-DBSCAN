@@ -135,11 +135,11 @@ The clusters can then be used as shown in the section **Clustering individuals b
 
 For more comprehensive examples for the feature set, try out the demo that corresponds to your NetLogo version.
 
-* For NetLogo 5, use `demo/dbscan-clustering-demo-v5.nlogo`
+* For NetLogo 5, use [demo/dbscan-clustering-demo-v5.nlogo](https://github.com/chrfrantz/NetLogo-Extension-DBSCAN/blob/master/demo/dbscan-clustering-demo-v5.nlogo). (Note: the NetLogo 5 demo model does not include an example for clustering patches; this feature is only available for NetLogo 6 onwards.)
 
-* For NetLogo 6 (and higher), use `demo/dbscan-clustering-demo-v6.nlogo` (Note that the NetLogo 6 demo model also includes an example for clustering patches.)
+* For NetLogo 6 (and higher), use [demo/dbscan-clustering-demo-v6.nlogo](https://github.com/chrfrantz/NetLogo-Extension-DBSCAN/blob/master/demo/dbscan-clustering-demo-v6.nlogo).
 
-Clustering agents by location using any of the demo models should produce the following output (the cluster centroid is shown as a coloured patch).
+Clustering agents by location using any of the demo models should produce the following output (in this example the cluster centroid is shown as a coloured patch).
 
 ![Location-based clustering demo output](https://github.com/chrfrantz/NetLogo-Extension-DBSCAN/raw/master/doc/ExampleLocationBasedClusteringOutput.png)
 
@@ -155,7 +155,7 @@ To trigger the installation, simply add `extensions [dbscan]` at the top of your
 
 ### Variant 1 (requires NetLogo 6.1.0 or higher): Manual Installation via NetLogo Extension Manager
 
-Use the Extension Manager provided by NetLogo by selecting `Tools` in the menu bar, followed by `Extensions ...`. In the dialog, scroll down to the extension `DBSCAN` and click `Install`. For more details about the Extension Manager, see its official [documentation](http://ccl.northwestern.edu/netlogo/docs/extension-manager.html).
+Use the Extension Manager provided by NetLogo by selecting `Tools` in the menu bar, followed by `Extensions ...`. In the dialog, scroll down to the extension `DBSCAN` and click `Install`. You can now use it in your models. For more details about the Extension Manager, see its official [documentation](http://ccl.northwestern.edu/netlogo/docs/extension-manager.html).
 
 ### Variant 2: Downloading jar files and placing in extensions folder
 
