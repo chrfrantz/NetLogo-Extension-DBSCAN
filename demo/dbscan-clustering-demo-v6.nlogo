@@ -292,11 +292,11 @@ This model demonstrates the use of the DBSCAN extension (https://github.com/chrf
 
 The DBSCAN algorithm clusters items based on value proximity (based on the maximum permissible distance and a minimum number of items to form a cluster). Unlike K-means it operates without specifying the number of expected clusters in advance, which makes it useful for exploration of unknown data (more details in the link at the bottom).
 
-For variable-based clustering of agents, individuals are clustered based on the value difference of their wealth levels and the minimum number of members required to form cluster.
+For variable-based clustering of agents, individuals are clustered based on the value difference of their wealth levels and the minimum number of members required to form a cluster.
 
-For location-based clustering, individuals are clustered based on their proximity and the minimum number of members required to form cluster.
+For location-based clustering, individuals are clustered based on their proximity and the minimum number of members required to form a cluster.
 
-For variable-based clustering of patches (as opposed to individuals), patches are clustered based on resource level and the minimum number of members required to form cluster.
+For variable-based clustering of patches (as opposed to individuals), patches are clustered based on resource level and the minimum number of members required to form a cluster.
 
 ## HOW TO USE IT
 
