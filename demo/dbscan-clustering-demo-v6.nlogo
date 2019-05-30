@@ -4,9 +4,9 @@
 ;
 ; Author: Christopher Frantz (cf@christopherfrantz.org)
 ;
-; Last update: 29/05/2019
+; Last update: 30/05/2019
 ;
-; For documentation and details about supported NetLogo versions refer to
+; For documentation and details about the extension and supported NetLogo versions refer to
 ; https://github.com/chrfrantz/NetLogo-Extension-DBSCAN#readme
 ;
 
@@ -304,7 +304,7 @@ Click either button and observe how the clustering works both for variable-based
 
 ## THINGS TO TRY
 
-Try varying the maximum distance (slider 'max-distance-agents') to see how agents are clustered by variable for different wealth ranges (button 'cluster-agents-by-variable').  The same slider is also used for the maximum permissible distance between agents if performing location-based clustering (button 'cluster-agents-by-location'). In addition, try out the clustering of patches by different resource levels (slider 'max-distance-patches') using the button 'cluster-patches-by-variable'. You can further vary the number of members (i.e., agents or patches) necessary to form a cluster and see how this changes the emerging clusters.
+Try varying the maximum distance (slider 'maximum-distance-agents') to see how agents are clustered by variable for different wealth ranges (button 'cluster-agents-by-variable').  The same slider is also used for the maximum permissible distance between agents if performing location-based clustering (button 'cluster-agents-by-location'). In addition, try out the clustering of patches by different resource levels (slider 'maximum-distance-patches') using the button 'cluster-patches-by-variable'. You can further vary the number of members (i.e., agents or patches) necessary to form a cluster (slider 'minimum-number-of-members') and see how this changes the emerging clusters.
 
 ## NETLOGO FEATURES
 

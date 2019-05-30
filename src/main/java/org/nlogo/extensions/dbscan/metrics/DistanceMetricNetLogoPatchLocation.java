@@ -7,9 +7,15 @@ import org.nlogo.api.AgentVariableNumbers;
 
 /**
  * Distance metric implementation for patch locations.
+ * 
+ * While clustering patches by location does not really make sense,
+ * perhaps future NetLogo features (e.g., sparse patch matrices) may warrant
+ * the use.
+ * 
+ * Website: https://github.com/chrfrantz/NetLogo-Extension-DBSCAN
  *
  * @author <a href="mailto:cf@christopherfrantz.org>Christopher Frantz</a>
- * @version 0.3 (28.05.2019)
+ * @version 0.3 (30.05.2019)
  *
  */
 public class DistanceMetricNetLogoPatchLocation implements DistanceMetric<Agent>{

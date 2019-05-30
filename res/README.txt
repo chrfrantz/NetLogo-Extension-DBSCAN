@@ -1,4 +1,4 @@
-This archive contains the DBSCAN Extension for NetLogo, v0.3 (28.05.2019). 
+This archive contains the DBSCAN Extension for NetLogo, v0.3 (30.05.2019). 
 
 Note: The new feature of this release (clustering patches - as opposed to just
 turtles - by variable) are only supported for NetLogo versions 6 and higher.

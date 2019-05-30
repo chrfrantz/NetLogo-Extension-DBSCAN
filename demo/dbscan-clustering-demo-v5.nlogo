@@ -219,7 +219,7 @@ HORIZONTAL
 @#$#@#$#@
 ## WHAT IS IT?
 
-This model demonstrates the use of the DBSCAN extension (https://github.com/chrfrantz/NetLogo-Extension-DBSCAN/). It highlights clustering of individuals/turtles by both variables as well as location.
+This model demonstrates the use of the DBSCAN extension (https://github.com/chrfrantz/NetLogo-Extension-DBSCAN/). It highlights clustering of individuals/turtles by both variables as well as location. (Clustering of patches is supported for NetLogo 6 onwards.)
 
 ## HOW IT WORKS
 
@@ -237,7 +237,7 @@ Click either button and observe how the clustering works both for variable-based
 
 ## THINGS TO TRY
 
-Try varying the maximum distance (slider 'max-distance-agents') to see how agents are clustered by variable for different wealth ranges (button 'cluster-agents-by-variable').  The same slider is also used for the maximum permissible distance between agents if performing location-based clustering (button 'cluster-agents-by-location'). You can further vary the number of members necessary to form a cluster and see how this changes the emerging clusters.
+Try varying the maximum distance (slider 'maximum-distance-agents') to see how agents are clustered by variable for different wealth ranges (button 'cluster-agents-by-variable').  The same slider is also used for the maximum permissible distance between agents if performing location-based clustering (button 'cluster-agents-by-location'). You can further vary the number of members necessary to form a cluster (slider 'minimum-number-of-members') and see how this changes the emerging clusters.
 
 ## NETLOGO FEATURES
 

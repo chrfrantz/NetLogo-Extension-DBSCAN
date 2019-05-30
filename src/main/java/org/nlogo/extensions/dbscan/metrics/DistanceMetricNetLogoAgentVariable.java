@@ -7,9 +7,11 @@ import org.nlogo.api.AgentException;
 
 /**
  * Distance metric implementation for agent variables.
+ * 
+ * Website: https://github.com/chrfrantz/NetLogo-Extension-DBSCAN
  *
  * @author <a href="mailto:cf@christopherfrantz.org>Christopher Frantz</a>
- * @version 0.3 (28.05.2019)
+ * @version 0.3 (30.05.2019)
  *
  */
 public class DistanceMetricNetLogoAgentVariable implements DistanceMetric<Agent>{
