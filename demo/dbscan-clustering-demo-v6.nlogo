@@ -41,7 +41,7 @@ to setup
   ask agents
     [
       setxy random-xcor random-ycor
-      set wealth (max (list min-wealth (random max-wealth)) )
+      set wealth (max (list min-wealth (random max-wealth)))
     ]
 
   ; Set up patches with clustering variable
@@ -54,7 +54,8 @@ end
 to cluster-agents-by-variable
   setup
 
-  ; Cluster agents by variable "wealth", with at least *minimum-number-of-members* members to constitute a cluster, and a maximum value difference of *maximum-distance*
+  ; Cluster agents by variable "wealth", with at least *minimum-number-of-members* members to constitute a cluster,
+  ; and a maximum value difference of *maximum-distance-agents*
   let clusters dbscan:cluster-by-variable agents "wealth" minimum-number-of-members maximum-distance-agents
 
   ; Show number of clusters
@@ -87,7 +88,8 @@ end
 to cluster-agents-by-location
   setup
 
-  ; Cluster agents by location, with at least *minimum-number-of-members* members to constitute a cluster, and a maximum distance of *maximum-distance-agents*
+  ; Cluster agents by location, with at least *minimum-number-of-members* members to constitute a cluster,
+  ; and a maximum distance of *maximum-distance-agents*
   let clusters dbscan:cluster-by-location agents minimum-number-of-members maximum-distance-agents
 
   ; Show number of clusters
@@ -124,7 +126,8 @@ end
 to cluster-patches-by-variable
   setup
 
-  ; Cluster agents by variable "resource", with at least *minimum-number-of-members* members to constitute a cluster, and a maximum value difference of *maximum-distance-patches*
+  ; Cluster agents by variable "resource", with at least *minimum-number-of-members* members to constitute a cluster,
+  ; and a maximum value difference of *maximum-distance-patches*
   let clusters dbscan:cluster-by-variable patches "resource" minimum-number-of-members maximum-distance-patches
 
   ; Show number of clusters
