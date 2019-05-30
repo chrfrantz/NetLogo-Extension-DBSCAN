@@ -6,10 +6,11 @@ turtles - by variable) are only supported for NetLogo versions 6 and higher.
 For NetLogo 6.1 onwards, consider using the auto-installation feature 
 (triggered by adding extension header 'extensions [ dbscan ]' to the model 
 code and saving it) or the Extension Manager. For older versions, create a 
-folder 'dbscan' in NetLogo's app/extensions folder and copy the contents of 
-this archive into that folder.
+folder 'dbscan' in NetLogo's app/extensions folder and copy the jar files 
+contained in this archive into that folder. You can use the provided demo 
+model to learn more about the extension.
 
-For more information and detailed installation and usage instructions, refer 
+For latest updates, detailed installation and usage instructions, refer 
 to https://github.com/chrfrantz/NetLogo-Extension-DBSCAN#readme
 
 Author: Christopher Frantz
