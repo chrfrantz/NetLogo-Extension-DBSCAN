@@ -1,10 +1,10 @@
 ;
-; Demonstration Model for DBSCAN extension (v0.3) for NetLogo version 6 onwards.
+; Demonstration Model for DBSCAN extension (v0.4) for NetLogo version 6 onwards.
 ; For the use with NetLogo version 5, check dbscan-clustering-demo-v5.nlogo.
 ;
 ; Author: Christopher Frantz (cf@christopherfrantz.org)
 ;
-; Last update: 30/05/2019
+; Last update: 08/06/2019
 ;
 ; For documentation and details about the extension and supported NetLogo versions refer to
 ; https://github.com/chrfrantz/NetLogo-Extension-DBSCAN#readme
@@ -304,7 +304,13 @@ Click either button and observe how the clustering works both for variable-based
 
 ## THINGS TO TRY
 
-Try varying the maximum distance (slider 'maximum-distance-agents') to see how agents are clustered by variable for different wealth ranges (button 'cluster-agents-by-variable').  The same slider is also used for the maximum permissible distance between agents if performing location-based clustering (button 'cluster-agents-by-location'). In addition, try out the clustering of patches by different resource levels (slider 'maximum-distance-patches') using the button 'cluster-patches-by-variable'. You can further vary the number of members (i.e., agents or patches) necessary to form a cluster (slider 'minimum-number-of-members') and see how this changes the emerging clusters.
+Try varying the maximum distance (slider 'maximum-distance-agents') to see how agents are clustered by variable for different wealth ranges (button 'cluster-agents-by-variable').  The same slider is also used for the maximum permissible distance between agents if performing location-based clustering (button 'cluster-agents-by-location'). 
+
+In addition, try out the clustering of patches by different resource levels (slider 'maximum-distance-patches') using the button 'cluster-patches-by-variable'. 
+
+You can further vary the number of members (i.e., agents or patches) necessary to form a cluster (slider 'minimum-number-of-members') and see how this changes the emerging clusters.
+
+Finally, change the topology of the world (horizontal/vertical wrapping, no wrapping) and rerun the clustering to see how it affects the detected clusters and their centroids.
 
 ## NETLOGO FEATURES
 

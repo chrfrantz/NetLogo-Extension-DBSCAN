@@ -1,10 +1,13 @@
-This archive contains the DBSCAN Extension for NetLogo, v0.3 (30.05.2019). 
+This archive contains the DBSCAN Extension for NetLogo, v0.4 (08.06.2019). 
 
-Note: The new feature of this release (clustering patches - as opposed to just
-turtles - by variable) are only supported for NetLogo versions 6 and higher.
+Key features:
+- Density-based clustering of turtles and patches by location and variables
+- Comprehensive support of NetLogo topologies
+- Note that the clustering of patches is only supported for NetLogo versions 
+  6 and higher.
 
 For NetLogo 6.1 onwards, consider using the auto-installation feature 
-(triggered by adding extension header 'extensions [ dbscan ]' to the model 
+(triggered by adding extension header 'extensions [dbscan]' to the model 
 code and saving it) or the Extension Manager. For older versions, create a 
 folder 'dbscan' in NetLogo's app/extensions folder and copy the jar files 
 contained in this archive into that folder. You can use the provided demo 

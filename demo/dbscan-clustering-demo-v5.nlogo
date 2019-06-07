@@ -1,5 +1,5 @@
 ;
-; Demonstration Model for DBSCAN extension for NetLogo (version 5).
+; Demonstration Model for DBSCAN extension (v0.4) for NetLogo 5.*.
 ; For the use with NetLogo version 6 onwards, check dbscan-clustering-demo-v6.nlogo.
 ;
 ; Note: NetLogo 6 or higher supports all features of the extension (clustering of individuals and patches).
@@ -9,7 +9,7 @@
 ;
 ; Author: Christopher Frantz (cf@christopherfrantz.org)
 ;
-; Last update: 29/05/2019
+; Last update: 08/06/2019
 ;
 ; For documentation and details about supported NetLogo versions refer to
 ; https://github.com/chrfrantz/NetLogo-Extension-DBSCAN#readme
@@ -237,7 +237,11 @@ Click either button and observe how the clustering works both for variable-based
 
 ## THINGS TO TRY
 
-Try varying the maximum distance (slider 'maximum-distance-agents') to see how agents are clustered by variable for different wealth ranges (button 'cluster-agents-by-variable').  The same slider is also used for the maximum permissible distance between agents if performing location-based clustering (button 'cluster-agents-by-location'). You can further vary the number of members necessary to form a cluster (slider 'minimum-number-of-members') and see how this changes the emerging clusters.
+Try varying the maximum distance (slider 'maximum-distance-agents') to see how agents are clustered by variable for different wealth ranges (button 'cluster-agents-by-variable').  The same slider is also used for the maximum permissible distance between agents if performing location-based clustering (button 'cluster-agents-by-location').
+
+You can further vary the number of members necessary to form a cluster (slider 'minimum-number-of-members') and see how this changes the emerging clusters.
+
+Finally, change the topology of the world (horizontal/vertical wrapping, no wrapping) and rerun the clustering to see how it affects the detected clusters and their centroids.
 
 ## NETLOGO FEATURES
 

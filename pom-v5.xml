@@ -128,6 +128,22 @@
               <value>World dim = ((org.nlogo.api.Agent)first).world();</value>
             </replacement>
             <replacement>
+              <token>dim.height\(\);</token>
+              <value>dim.worldHeight();</value>
+            </replacement>
+            <replacement>
+              <token>new DistanceMetricNetLogoAgentLocationTorus\(dim.width\(\), dim.height\(\)\) :</token>
+              <value>new DistanceMetricNetLogoAgentLocationTorus(dim.worldWidth(), dim.worldHeight()) :</value>
+            </replacement>
+            <replacement>
+              <token>new DistanceMetricNetLogoAgentLocationVerticalCylinder\(dim.width\(\)\) :</token>
+              <value>new DistanceMetricNetLogoAgentLocationVerticalCylinder(dim.worldWidth()) :</value>
+            </replacement>
+            <replacement>
+              <token>new DistanceMetricNetLogoAgentLocationHorizontalCylinder\(dim.height\(\)\) :</token>
+              <value>new DistanceMetricNetLogoAgentLocationHorizontalCylinder(dim.worldHeight()) :</value>
+            </replacement>
+            <replacement>
               <token>SyntaxJ.reporterSyntax</token>
               <value>Syntax.reporterSyntax</value>
             </replacement>
