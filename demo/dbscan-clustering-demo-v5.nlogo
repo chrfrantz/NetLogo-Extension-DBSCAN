@@ -44,14 +44,15 @@ to setup
   ask agents
     [
       setxy random-xcor random-ycor
-      set wealth (max (list  min-wealth (random max-wealth)) )
+      set wealth (max (list  min-wealth (random max-wealth)))
     ]
 end
 
 to cluster-by-variable
   setup
 
-  ; Cluster agents by variable "wealth", with at least *minimum-number-of-members* members to constitute a cluster, and a maximum value difference of *maximum-distance*
+  ; Cluster agents by variable "wealth", with at least *minimum-number-of-members* members to constitute a cluster,
+  ; and a maximum value difference of *maximum-distance*
   let clusters dbscan:cluster-by-variable agents "wealth" minimum-number-of-members maximum-distance
 
   ; Show number of clusters
@@ -84,7 +85,8 @@ end
 to cluster-by-location
   setup
 
-  ; Cluster agents by location, with at least *minimum-number-of-members* members to constitute a cluster, and a maximum distance of *maximum-distance*
+  ; Cluster agents by location, with at least *minimum-number-of-members* members to constitute a cluster,
+  ; and a maximum distance of *maximum-distance*
   let clusters dbscan:cluster-by-location agents minimum-number-of-members maximum-distance
 
   ; Show number of clusters
@@ -189,7 +191,7 @@ NIL
 SLIDER
 185
 12
-357
+372
 45
 maximum-distance
 maximum-distance
