@@ -18,9 +18,9 @@ breed [ agents agt ]
 
 agents-own [ wealth ]
 
-; Selectively called to parametrise agents
+; Selectively called to parameterise agents
 to pre-setup
-  set num-agents 50
+  set num-agents 170
 end
 
 to setup
@@ -59,8 +59,8 @@ GRAPHICS-WINDOW
 1
 1
 0
-1
-1
+0
+0
 1
 -16
 16

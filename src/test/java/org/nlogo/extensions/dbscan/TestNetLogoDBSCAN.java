@@ -31,24 +31,45 @@ import org.nlogo.headless.HeadlessWorkspace;
  * 
  * Setup:
  * - Import all jar libraries from the app folder contained in the in NetLogo installation folder.
- * - Copy the test model (java-netlogo-clustering-test-v6.nlogo) contained in the test subfolder resources
- *   to the project directory's folder 'src/...' as specified in the TESTFILE variable below (or adapt 
- *   the path in the variable)
- * - Ensure that the dbscan extension is installed in NetLogo 
+ * - Copy the test models (java-netlogo-clustering-test-v6-*.nlogo) contained in the test/resources subfolder
+ *   to the project directory's (variable 'user.dir') subfolder 'src/...' as specified in the TESTFILE variable below 
+ *   (or adapt the path in the variable).
+ * - Ensure that the dbscan extension is installed in NetLogo (see the website above for installation instructions).
+ * 
+ * Note: If you get test errors related to varying error messages, check which JDK you are running. 
+ *       All tests have been written against Oracle JDK 1.8.
  *
  * @author Christopher Frantz <cf@christopherfrantz.org>
- * @version 0.3 (30.05.2019)
+ * @version 0.4 (08.06.2019)
  *
  */
 
 public class TestNetLogoDBSCAN {
 
     /**
-     * Test model used by all tests
+     * Test model used by most tests - with NetLogo default torus topology
      */
-    public static final String TESTMODEL = System.getProperty("user.dir")
-            + "/src/test/resources/java-netlogo-clustering-test-v6.nlogo";
+    public static final String TESTMODEL_TORUS = System.getProperty("user.dir")
+            + "/src/test/resources/java-netlogo-clustering-test-v6-torus.nlogo";
 
+    /**
+     * Same model as above, but with vertical cylinder topology
+     */
+    public static final String TESTMODEL_VERTICAL_CYLINDER = System.getProperty("user.dir")
+            + "/src/test/resources/java-netlogo-clustering-test-v6-vertical-cylinder.nlogo";
+    
+    /**
+     * Same model as above, but with horizontal cylinder topology
+     */
+    public static final String TESTMODEL_HORIZONTAL_CYLINDER = System.getProperty("user.dir")
+            + "/src/test/resources/java-netlogo-clustering-test-v6-horizontal-cylinder.nlogo";
+    
+    /**
+     * Same model as above, but with box topology
+     */
+    public static final String TESTMODEL_BOX = System.getProperty("user.dir")
+            + "/src/test/resources/java-netlogo-clustering-test-v6-box.nlogo";
+    
     /**
      * Produces additional output helpful for debugging tests.
      */
@@ -65,7 +86,7 @@ public class TestNetLogoDBSCAN {
         HeadlessWorkspace ws = HeadlessWorkspace.newInstance();
 
         try {
-            ws.openString(FileIO.url2String("file://" + TESTMODEL));
+            ws.openString(FileIO.url2String("file://" + TESTMODEL_TORUS));
         } catch (Exception e1) {
             fail("Problems when opening NetLogo model file: " + e1.getMessage());
         }
@@ -144,7 +165,7 @@ public class TestNetLogoDBSCAN {
         HeadlessWorkspace ws = HeadlessWorkspace.newInstance();
 
         try {
-            ws.openString(FileIO.url2String("file://" + TESTMODEL));
+            ws.openString(FileIO.url2String("file://" + TESTMODEL_TORUS));
         } catch (Exception e1) {
             fail("Problems when opening NetLogo model file: " + e1.getMessage());
         }
@@ -213,7 +234,7 @@ public class TestNetLogoDBSCAN {
         HeadlessWorkspace ws = HeadlessWorkspace.newInstance();
 
         try {
-            ws.openString(FileIO.url2String("file://" + TESTMODEL));
+            ws.openString(FileIO.url2String("file://" + TESTMODEL_TORUS));
         } catch (Exception e1) {
             fail("Problems when opening NetLogo model file: " + e1);
         }
@@ -283,7 +304,7 @@ public class TestNetLogoDBSCAN {
         HeadlessWorkspace ws = HeadlessWorkspace.newInstance();
 
         try {
-            ws.openString(FileIO.url2String("file://" + TESTMODEL));
+            ws.openString(FileIO.url2String("file://" + TESTMODEL_TORUS));
         } catch (Exception e1) {
             fail("Problems when opening NetLogo model file: " + e1);
         }
@@ -339,13 +360,65 @@ public class TestNetLogoDBSCAN {
     }
 
     @Test
-    public void testClusteringOfTurtlesByLocationInExistingNetLogoModelHeadless() {
+    public void testClusteringOfTurtlesByLocationInExistingNetLogoModelTorusHeadless() {
 
         HeadlessWorkspace workspace =
             HeadlessWorkspace.newInstance() ;
         try {
           // Load model
-          workspace.open(TESTMODEL, false);
+          workspace.open(TESTMODEL_TORUS, false);
+          // Parameterise agent number
+          workspace.command("pre-setup");
+          // Setting up entities
+          workspace.command("setup");
+          // Run clustering
+          workspace.command("set clusters dbscan:cluster-by-location agents 3 3");
+          if (debugOutput) {
+              // Print clusters
+              System.out.println(workspace.report("length clusters"));
+          }
+          assertEquals("Number of clusters expected", 5.0, workspace.report("length clusters"));
+          workspace.dispose();
+        } catch(Exception ex) {
+          fail("Clustering was not successful (but should have been). Exception: " + ex.getMessage());
+        }
+
+    }
+
+    @Test
+    public void testClusteringOfTurtlesByLocationInExistingNetLogoModelBoxHeadless() {
+
+        HeadlessWorkspace workspace =
+            HeadlessWorkspace.newInstance() ;
+        try {
+          // Load model
+          workspace.open(TESTMODEL_BOX, false);
+          // Parameterise agent number
+          workspace.command("pre-setup");
+          // Setting up entities
+          workspace.command("setup");
+          // Run clustering
+          workspace.command("set clusters dbscan:cluster-by-location agents 3 3");
+          if (debugOutput) {
+              // Print clusters
+              System.out.println(workspace.report("length clusters"));
+          }
+          assertEquals("Number of clusters expected", 12.0, workspace.report("length clusters"));
+          workspace.dispose();
+        } catch(Exception ex) {
+          fail("Clustering was not successful (but should have been). Exception: " + ex.getMessage());
+        }
+
+    }
+
+    @Test
+    public void testClusteringOfTurtlesByLocationInExistingNetLogoModelVerticalCylinderHeadless() {
+
+        HeadlessWorkspace workspace =
+            HeadlessWorkspace.newInstance() ;
+        try {
+          // Load model
+          workspace.open(TESTMODEL_VERTICAL_CYLINDER, false);
           // Parameterise agent number
           workspace.command("pre-setup");
           // Setting up entities
@@ -365,13 +438,39 @@ public class TestNetLogoDBSCAN {
     }
 
     @Test
+    public void testClusteringOfTurtlesByLocationInExistingNetLogoModelHorizontalCylinderHeadless() {
+
+        HeadlessWorkspace workspace =
+            HeadlessWorkspace.newInstance() ;
+        try {
+          // Load model
+          workspace.open(TESTMODEL_HORIZONTAL_CYLINDER, false);
+          // Parameterise agent number
+          workspace.command("pre-setup");
+          // Setting up entities
+          workspace.command("setup");
+          // Run clustering
+          workspace.command("set clusters dbscan:cluster-by-location agents 3 3");
+          if (debugOutput) {
+              // Print clusters
+              System.out.println(workspace.report("length clusters"));
+          }
+          assertEquals("Number of clusters expected", 9.0, workspace.report("length clusters"));
+          workspace.dispose();
+        } catch(Exception ex) {
+          fail("Clustering was not successful (but should have been). Exception: " + ex.getMessage());
+        }
+
+    }
+
+    @Test
     public void testClusteringOfTurtlesByLocationInExistingNetLogoModelHeadlessMissingInput() {
 
         HeadlessWorkspace workspace =
             HeadlessWorkspace.newInstance() ;
         try {
           // Load model
-          workspace.open(TESTMODEL, false);
+          workspace.open(TESTMODEL_TORUS, false);
           // Setting up entities
           workspace.command("setup");
           // Run clustering with empty agent input set
@@ -393,7 +492,7 @@ public class TestNetLogoDBSCAN {
             HeadlessWorkspace.newInstance() ;
         try {
           // Load model
-          workspace.open(TESTMODEL, false);
+          workspace.open(TESTMODEL_TORUS, false);
           // Parameterise agent number
           workspace.command("pre-setup");
           // Setting up entities
@@ -417,7 +516,7 @@ public class TestNetLogoDBSCAN {
             HeadlessWorkspace.newInstance() ;
         try {
           // Load model
-          workspace.open(TESTMODEL, false);
+          workspace.open(TESTMODEL_TORUS, false);
           // Parameterise agent number
           workspace.command("pre-setup");
           // Initialise agents
@@ -441,7 +540,7 @@ public class TestNetLogoDBSCAN {
             HeadlessWorkspace.newInstance() ;
         try {
           // Load model
-          workspace.open(TESTMODEL, false);
+          workspace.open(TESTMODEL_TORUS, false);
           // Parameterise agent number
           workspace.command("pre-setup");
           // Initialise agents
@@ -465,7 +564,7 @@ public class TestNetLogoDBSCAN {
             HeadlessWorkspace.newInstance() ;
         try {
           // Load model
-          workspace.open(TESTMODEL, false);
+          workspace.open(TESTMODEL_TORUS, false);
           // Parameterise agent number
           workspace.command("pre-setup");
           // Initialise agents
@@ -487,7 +586,7 @@ public class TestNetLogoDBSCAN {
             HeadlessWorkspace.newInstance() ;
         try {
           // Load model
-          workspace.open(TESTMODEL, false);
+          workspace.open(TESTMODEL_TORUS, false);
           // Parameterise agent number
           workspace.command("pre-setup");
           // Initialise agents
@@ -511,7 +610,7 @@ public class TestNetLogoDBSCAN {
             HeadlessWorkspace.newInstance() ;
         try {
           // Load model
-          workspace.open(TESTMODEL, false);
+          workspace.open(TESTMODEL_TORUS, false);
           // Parameterise agent number
           workspace.command("pre-setup");
           // Setting up entities
@@ -537,18 +636,18 @@ public class TestNetLogoDBSCAN {
             HeadlessWorkspace.newInstance() ;
         try {
           // Load model
-          workspace.open(TESTMODEL, false);
+          workspace.open(TESTMODEL_TORUS, false);
           // Parameterise agent number
           workspace.command("pre-setup");
           // Setting up entities
           workspace.command("setup");
           // Run clustering
-          workspace.command("set clusters dbscan:cluster-by-variable agents \"wealth\" 3 2");
+          workspace.command("set clusters dbscan:cluster-by-variable agents \"wealth\" 3 1");
           if (debugOutput) {
               // Print clusters
               System.out.println(workspace.report("length clusters"));
           }
-          assertEquals("Number of clusters expected", 5.0, workspace.report("length clusters"));
+          assertEquals("Number of clusters expected", 2.0, workspace.report("length clusters"));
           workspace.dispose();
         } catch(Exception ex) {
           fail("Clustering was not successful (but should have been). Exception: " + ex.getMessage());
@@ -563,7 +662,7 @@ public class TestNetLogoDBSCAN {
             HeadlessWorkspace.newInstance() ;
         try {
           // Load model
-          workspace.open(TESTMODEL, false);
+          workspace.open(TESTMODEL_TORUS, false);
           // Setting up entities
           workspace.command("setup");
           // Run clustering with empty agent input set
@@ -585,7 +684,7 @@ public class TestNetLogoDBSCAN {
             HeadlessWorkspace.newInstance() ;
         try {
           // Load model
-          workspace.open(TESTMODEL, false);
+          workspace.open(TESTMODEL_TORUS, false);
           // Parameterise agent number
           workspace.command("pre-setup");
           // Setting up entities
@@ -609,7 +708,7 @@ public class TestNetLogoDBSCAN {
             HeadlessWorkspace.newInstance() ;
         try {
           // Load model
-          workspace.open(TESTMODEL, false);
+          workspace.open(TESTMODEL_TORUS, false);
           // Parametrise agent numbers
           workspace.command("pre-setup");
           // Initialise agents
@@ -633,7 +732,7 @@ public class TestNetLogoDBSCAN {
             HeadlessWorkspace.newInstance() ;
         try {
           // Load model
-          workspace.open(TESTMODEL, false);
+          workspace.open(TESTMODEL_TORUS, false);
           // Parametrise agent numbers
           workspace.command("pre-setup");
           // Initialise agents
@@ -657,14 +756,14 @@ public class TestNetLogoDBSCAN {
             HeadlessWorkspace.newInstance() ;
         try {
           // Load model
-          workspace.open(TESTMODEL, false);
+          workspace.open(TESTMODEL_TORUS, false);
           // Parametrise agent numbers
           workspace.command("pre-setup");
           // Initialise agents
           workspace.command("setup");
           // Run clustering with max distance set to 0
           workspace.command("set clusters dbscan:cluster-by-variable agents \"wealth\" 2 0");
-          assertEquals("Number of clusters expected", 11.0, workspace.report("length clusters"));
+          assertEquals("Number of clusters expected", 34.0, workspace.report("length clusters"));
           workspace.dispose();
         } catch(Exception ex) {
           fail("Maximum distance of 0 should be permissible input. Exception: " + ex.getMessage());
@@ -679,7 +778,7 @@ public class TestNetLogoDBSCAN {
             HeadlessWorkspace.newInstance() ;
         try {
           // Load model
-          workspace.open(TESTMODEL, false);
+          workspace.open(TESTMODEL_TORUS, false);
           // Parametrise agent numbers
           workspace.command("pre-setup");
           // Initialise agents

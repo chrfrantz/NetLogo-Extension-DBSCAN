@@ -4,7 +4,7 @@
 
   <groupId>org.nlogo.extensions.dbscan</groupId>
   <artifactId>dbscan</artifactId>
-  <version>0.3</version>
+  <version>0.4</version>
   <packaging>pom</packaging>
 
   <repositories>
@@ -64,6 +64,25 @@
           </archive>
         </configuration>
       </plugin>
+	  <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.1</version>
+        <configuration>
+		  <compilerArgs>
+		    <arg>-Xlint:deprecation</arg>
+          </compilerArgs>
+        </configuration>
+      </plugin>
+	  <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>2.12.4</version>
+	    <!--<configuration>
+          <reuseForks>false</reuseForks>
+          <forkCount>1</forkCount>
+        </configuration>-->
+	  </plugin>
     </plugins>
   </build>
 

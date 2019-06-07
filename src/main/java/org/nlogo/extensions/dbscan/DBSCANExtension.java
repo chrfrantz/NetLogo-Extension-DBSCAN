@@ -19,10 +19,14 @@ import org.nlogo.api.PrimitiveManager;
 import org.nlogo.api.Reporter;
 import org.nlogo.core.Syntax;
 import org.nlogo.core.SyntaxJ;
+import org.nlogo.core.WorldDimensions;
 import org.nlogo.extensions.dbscan.metrics.DistanceMetricNetLogoAgentVariable;
 import org.nlogo.extensions.dbscan.metrics.DistanceMetricNetLogoPatchLocation;
 import org.nlogo.extensions.dbscan.metrics.DistanceMetricNetLogoPatchVariable;
-import org.nlogo.extensions.dbscan.metrics.DistanceMetricNetLogoAgentLocation;
+import org.nlogo.extensions.dbscan.metrics.DistanceMetricNetLogoAgentLocationBox;
+import org.nlogo.extensions.dbscan.metrics.DistanceMetricNetLogoAgentLocationHorizontalCylinder;
+import org.nlogo.extensions.dbscan.metrics.DistanceMetricNetLogoAgentLocationTorus;
+import org.nlogo.extensions.dbscan.metrics.DistanceMetricNetLogoAgentLocationVerticalCylinder;
 
 /**
  * NetLogo extension for clustering based on DBSCAN by agent/patch variables or coordinates.
@@ -30,7 +34,7 @@ import org.nlogo.extensions.dbscan.metrics.DistanceMetricNetLogoAgentLocation;
  * Website: https://github.com/chrfrantz/NetLogo-Extension-DBSCAN
  * 
  * @author <a href="mailto:cf@christopherfrantz.org>Christopher Frantz</a>
- * @version 0.3 (30.05.2019)
+ * @version 0.4 (08.06.2019)
  *
  */
 public class DBSCANExtension extends DefaultClassManager {
@@ -62,8 +66,8 @@ public class DBSCANExtension extends DefaultClassManager {
 
             AgentSet inputValues = null;
             String field = null;
-            int minNumberOfElements = -9999;
-            double maxDistance = -9999;
+            int minNumberOfElements = Integer.MIN_VALUE; // default to invalid value
+            double maxDistance = Integer.MIN_VALUE; // default to invalid value
 
             try {
                 inputValues = args[0].getAgentSet();
@@ -82,7 +86,7 @@ public class DBSCANExtension extends DefaultClassManager {
                 throw new ExtensionException(DBSCANExtensionErrors.ERROR_MISSING_CLUSTER_VARIABLE);
             }
 
-            if (minNumberOfElements == -9999) {
+            if (minNumberOfElements == Integer.MIN_VALUE) {
                 throw new ExtensionException(DBSCANExtensionErrors.ERROR_MISSING_MINIMUM_NUMBER_OF_ELEMENTS);
             }
 
@@ -90,7 +94,7 @@ public class DBSCANExtension extends DefaultClassManager {
                 throw new ExtensionException(DBSCANExtensionErrors.ERROR_INVALID_MINIMUM_NUMBER_OF_ELEMENTS);
             }
 
-            if (maxDistance == -9999) {
+            if (maxDistance == Integer.MIN_VALUE) {
                 throw new ExtensionException(DBSCANExtensionErrors.ERROR_MISSING_MAXIMUM_DISTANCE_OF_ELEMENTS);
             }
 
@@ -105,6 +109,9 @@ public class DBSCANExtension extends DefaultClassManager {
             boolean patches = false;
             int fieldIndex = -1;
             Object first = it.hasNext() ? it.next() : null;
+            if (first == null) {
+                throw new ExtensionException(DBSCANExtensionErrors.ERROR_NULL_INPUT_DATA);
+            }
             if (first.getClass().equals(Patch.class)) {
                 patches = true;
                 // if you modify the assignment of fieldIndex (and want to maintain NetLogo 5 compatibility), 
@@ -181,8 +188,8 @@ public class DBSCANExtension extends DefaultClassManager {
                 throws ExtensionException, LogoException {
 
             AgentSet inputValues = null;
-            int minNumberOfElements = -9999;
-            double maxDistance = -9999;
+            int minNumberOfElements = Integer.MIN_VALUE;
+            double maxDistance = Integer.MIN_VALUE;
 
             try {
                 inputValues = args[0].getAgentSet();
@@ -196,7 +203,7 @@ public class DBSCANExtension extends DefaultClassManager {
                 throw new ExtensionException(DBSCANExtensionErrors.ERROR_MISSING_INPUT_DATA);
             }
 
-            if (minNumberOfElements == -9999) {
+            if (minNumberOfElements == Integer.MIN_VALUE) {
                 throw new ExtensionException(DBSCANExtensionErrors.ERROR_MISSING_MINIMUM_NUMBER_OF_ELEMENTS);
             }
 
@@ -204,12 +211,16 @@ public class DBSCANExtension extends DefaultClassManager {
                 throw new ExtensionException(DBSCANExtensionErrors.ERROR_INVALID_MINIMUM_NUMBER_OF_ELEMENTS);
             }
 
-            if (maxDistance == -9999) {
+            if (maxDistance == Integer.MIN_VALUE) {
                 throw new ExtensionException(DBSCANExtensionErrors.ERROR_MISSING_MAXIMUM_DISTANCE_OF_ELEMENTS);
             }
 
             if (maxDistance < 0) {
                 throw new ExtensionException(DBSCANExtensionErrors.ERROR_NEGATIVE_MAXIMUM_DISTANCE_OF_ELEMENTS);
+            }
+            
+            if (ctx == null || ctx.world() == null) {
+                throw new ExtensionException(DBSCANExtensionErrors.ERROR_MODEL_CONTEXT_INACCESSIBLE);
             }
 
             // Convert input AgentSet to Collection
@@ -218,6 +229,9 @@ public class DBSCANExtension extends DefaultClassManager {
             // Check for patches
             boolean patches = false;
             Object first = it.hasNext() ? it.next() : null;
+            if (first == null) {
+                throw new ExtensionException(DBSCANExtensionErrors.ERROR_NULL_INPUT_DATA);
+            }
             if (first.getClass().equals(Patch.class)) {
                 patches = true;
             }
@@ -231,15 +245,27 @@ public class DBSCANExtension extends DefaultClassManager {
 
             // Perform clustering
             ArrayList<ArrayList<org.nlogo.api.Agent>> tmpList = null;
+            
+            // Retrieve world dimensions to determine topology - access to world() has been checked above
+            WorldDimensions dim = ctx.world().getDimensions();
 
             try {
                 DBSCANClusterer<org.nlogo.api.Agent> clusterer = new DBSCANClusterer<org.nlogo.api.Agent>(
                         inputCollection, minNumberOfElements, maxDistance, 
                         ( patches ? 
-                            // For patches, use patch-specific coordinate fields 
+                            // For patches, use patch-specific coordinate fields
                             new DistanceMetricNetLogoPatchLocation() :
-                            // ... treat all others as non-patch agents.
-                            new DistanceMetricNetLogoAgentLocation()));
+                            // ... treat all others as non-patch agents, and consider topologies
+                            // Torus
+                            (dim.wrappingAllowedInX() && dim.wrappingAllowedInY() ? new DistanceMetricNetLogoAgentLocationTorus(dim.width(), dim.height()) :
+                            // Vertical Cylinder
+                            (dim.wrappingAllowedInX() ? new DistanceMetricNetLogoAgentLocationVerticalCylinder(dim.width()) :
+                            // Horizontal Cylinder
+                            (dim.wrappingAllowedInY() ? new DistanceMetricNetLogoAgentLocationHorizontalCylinder(dim.height()) :
+                            // Box
+                            new DistanceMetricNetLogoAgentLocationBox())))
+                        )
+                    );
                 // will at least return empty list (not be null)
                 tmpList = clusterer.performClustering();
             } catch (DBSCANClusteringException e) {

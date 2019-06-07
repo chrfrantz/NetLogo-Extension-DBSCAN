@@ -11,19 +11,21 @@ import org.nlogo.api.AgentException;
  * Website: https://github.com/chrfrantz/NetLogo-Extension-DBSCAN
  *
  * @author <a href="mailto:cf@christopherfrantz.org>Christopher Frantz</a>
- * @version 0.3 (30.05.2019)
+ * @version 0.4 (08.06.2019)
  *
  */
 public class DistanceMetricNetLogoAgentVariable implements DistanceMetric<Agent>{
 
-    private String field = null;
+    private final String field;
 
-    public DistanceMetricNetLogoAgentVariable(String field) {
+    public DistanceMetricNetLogoAgentVariable(final String field) {
+        // null check is done prior to instantiation 
+        // field variable has to be upper case; ensured in calling code
         this.field = field;
     }
     
     @Override
-    public double calculateDistance(Agent val1, Agent val2) throws DBSCANClusteringException {
+    public double calculateDistance(final Agent val1, final Agent val2) throws DBSCANClusteringException {
         try {
             // Check on turtle level first ...
             Double val1Num = Double.parseDouble(val1.getTurtleOrLinkVariable(field).toString());

@@ -5,13 +5,13 @@
   <parent>
     <groupId>org.nlogo.extensions.dbscan</groupId>
     <artifactId>dbscan</artifactId>
-    <version>0.3</version>
+    <version>0.4</version>
     <relativePath>pom-root.xml</relativePath>
   </parent>
   
   <groupId>org.nlogo.extensions.dbscan</groupId>
   <artifactId>dbscan-NetLogo5</artifactId>
-  <version>0.3</version>
+  <version>0.4</version>
   <packaging>jar</packaging>
   
   <dependencies>
@@ -114,6 +114,18 @@
             <replacement>
               <token>import org.nlogo.core.SyntaxJ;</token>
               <value></value>
+            </replacement>
+            <replacement>
+              <token>import org.nlogo.core.WorldDimensions;</token>
+              <value>import org.nlogo.api.World;</value>
+            </replacement>
+            <replacement>
+              <token>ctx == null \|\| ctx.world\(\) == null</token>
+              <value>ctx == null</value>
+            </replacement>
+            <replacement>
+              <token>WorldDimensions dim = ctx.world\(\).getDimensions\(\);</token>
+              <value>World dim = ((org.nlogo.api.Agent)first).world();</value>
             </replacement>
             <replacement>
               <token>SyntaxJ.reporterSyntax</token>
