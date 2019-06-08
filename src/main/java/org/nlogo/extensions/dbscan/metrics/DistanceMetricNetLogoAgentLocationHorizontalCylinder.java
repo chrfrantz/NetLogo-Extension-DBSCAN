@@ -18,7 +18,7 @@ import org.nlogo.api.AgentVariableNumbers;
 public class DistanceMetricNetLogoAgentLocationHorizontalCylinder implements DistanceMetric<Agent>{
 
     private final int height;
-    
+
     public DistanceMetricNetLogoAgentLocationHorizontalCylinder(final int height) {
         this.height = height;
     }

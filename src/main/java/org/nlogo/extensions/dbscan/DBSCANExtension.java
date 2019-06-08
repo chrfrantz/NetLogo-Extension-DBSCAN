@@ -218,7 +218,7 @@ public class DBSCANExtension extends DefaultClassManager {
             if (maxDistance < 0) {
                 throw new ExtensionException(DBSCANExtensionErrors.ERROR_NEGATIVE_MAXIMUM_DISTANCE_OF_ELEMENTS);
             }
-            
+
             if (ctx == null || ctx.world() == null) {
                 throw new ExtensionException(DBSCANExtensionErrors.ERROR_MODEL_CONTEXT_INACCESSIBLE);
             }
@@ -274,7 +274,7 @@ public class DBSCANExtension extends DefaultClassManager {
 
             // Convert generated lists of clusters to nested LogoList
             LogoListBuilder list = new LogoListBuilder();
-            
+
             for (ArrayList<org.nlogo.api.Agent> intList: tmpList) {
                 LogoListBuilder internalBuilder = new LogoListBuilder();
                 for (org.nlogo.api.Agent agent: intList) {

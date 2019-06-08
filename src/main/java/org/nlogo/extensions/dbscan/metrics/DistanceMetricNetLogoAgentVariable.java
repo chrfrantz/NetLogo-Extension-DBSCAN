@@ -23,7 +23,7 @@ public class DistanceMetricNetLogoAgentVariable implements DistanceMetric<Agent>
         // field variable has to be upper case; ensured in calling code
         this.field = field;
     }
-    
+
     @Override
     public double calculateDistance(final Agent val1, final Agent val2) throws DBSCANClusteringException {
         try {

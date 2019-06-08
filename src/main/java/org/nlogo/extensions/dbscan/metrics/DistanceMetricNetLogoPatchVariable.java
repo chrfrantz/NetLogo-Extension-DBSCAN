@@ -21,7 +21,7 @@ public class DistanceMetricNetLogoPatchVariable implements DistanceMetric<Agent>
     public DistanceMetricNetLogoPatchVariable(final Integer field) {
         this.field = field;
     }
-    
+
     @Override
     public double calculateDistance(final Agent val1, final Agent val2) throws DBSCANClusteringException {
         try {
