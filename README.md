@@ -1,7 +1,11 @@
 # NetLogo-Extension-DBSCAN
 NetLogo extension for DBSCAN clustering algorithm
 
-It allows you to perform unsupervised density-based clustering based on specified turtle variables or proximity. The main advantage over supervised algorithms such as K-Means is that it is not necessary to specify the number of resulting clusters in advance.
+It allows you to perform unsupervised density-based clustering of turtles/agents and patches based on specified variables or by proximity. The main advantage over supervised algorithms such as K-Means is that it is not necessary to specify the number of resulting clusters in advance.
+
+This extension supports all versions of [NetLogo](https://ccl.northwestern.edu/netlogo/) from 5 onwards, including the latest version 6.1. The feature set of the extension varies depending on the NetLogo version, with full feature support from NetLogo 6 onwards.
+
+Author: Christopher Frantz
 
 ## Usage
 
@@ -23,7 +27,7 @@ Example:
 
 ```
 ; Import extension
-extensions [ dbscan ]
+extensions [dbscan]
 
 ... instantiate agents with variable "wealth" ...
 
@@ -81,10 +85,10 @@ Example:
 
 ```
 ; Import extension
-extensions [ dbscan ]
+extensions [dbscan]
 
 ... instantiate patches with variable "resource" ...
-patches-own [ resource ]
+patches-own [resource]
 
 ... and populate variable ...
 
@@ -122,7 +126,7 @@ Example:
 
 ```
 ; Import extension
-extensions [ dbscan ]
+extensions [dbscan]
 
 ... instantiate agents with coordinates ...
 
@@ -135,7 +139,7 @@ The clusters can then be used as shown in the section **Clustering individuals b
 
 For more comprehensive examples for the feature set, try out the demo that corresponds to your NetLogo version.
 
-* For NetLogo 5, use [demo/dbscan-clustering-demo-v5.nlogo](https://github.com/chrfrantz/NetLogo-Extension-DBSCAN/blob/master/demo/dbscan-clustering-demo-v5.nlogo). (Note: the NetLogo 5 demo model does not include an example for clustering patches; this feature is only available for NetLogo 6 onwards.)
+* For NetLogo 5, use [demo/dbscan-clustering-demo-v5.nlogo](https://github.com/chrfrantz/NetLogo-Extension-DBSCAN/blob/master/demo/dbscan-clustering-demo-v5.nlogo). (Note: the NetLogo 5 demo model does not include an example for clustering patches in addition to agents; this feature is only available for NetLogo 6 onwards.)
 
 * For NetLogo 6 (and higher), use [demo/dbscan-clustering-demo-v6.nlogo](https://github.com/chrfrantz/NetLogo-Extension-DBSCAN/blob/master/demo/dbscan-clustering-demo-v6.nlogo).
 
@@ -147,11 +151,12 @@ For a screenshot of the entire demo GUI including control elements and further c
 
 ## Deployment
 
-The preferred deployment variant is simply to use the auto-installation feature of NetLogo 6.1 (see Variant 0). Alternatively, you can install it using the Extension Manager provided by NetLogo 6.1 and higher (see Variant 1). For older versions of NetLogo (i.e., 6.0 or lower) you can download the corresponding jar files directly (Variant 2). Alternatively, for all supported versions of NetLogo you can build the extension from source (Variant 3).
+There are various deployment approaches available, reaching from simply auto-installation to building the extension from source. 
+Since NetLogo 6.1 the preferred deployment variant is simply to use the auto-installation feature (see Variant 0). Alternatively, you can install the extension using the Extension Manager provided by NetLogo 6.1 and higher (see Variant 1). For older versions of NetLogo (i.e., 6.0 or lower) you can download the corresponding jar files directly (Variant 2). Alternatively, for all supported versions of NetLogo you can build the extension from source (Variant 3).
 
 ### Variant 0 (requires NetLogo 6.1.0 or higher): Auto-Installation
 
-To trigger the installation, simply add `extensions [dbscan]` at the top of your model code and click on the `Check` button in the editor. NetLogo will then prompt you to confirm the installation of the extension and you should be able to immediately use it in your code (Note: Sometimes a restart of NetLogo seems necessary to activate newly installed extensions). You can manage the installed extension in the Extension Manager. For more details about the Extension Manager, see its official [documentation](http://ccl.northwestern.edu/netlogo/docs/extension-manager.html).
+To trigger the installation, simply add `extensions [dbscan]` at the top of your model code and click on the `Check` button in the editor (or switch tabs). NetLogo will then prompt you to confirm the installation of the extension and you can immediately use the clustering features in your code (Note: Sometimes a restart of NetLogo seems necessary to activate newly installed extensions). You can manage the installed extension in the Extension Manager. For more details about the Extension Manager, see Variant 1.
 
 ### Variant 1 (requires NetLogo 6.1.0 or higher): Manual Installation via NetLogo Extension Manager
 
@@ -171,7 +176,7 @@ You can build the extension from scratch using maven after cloning the repositor
 
 * For NetLogo version 6.1, run `mvn clean package -f pom-v6.1.xml`
 
-In addition, you will need to build the [DBSCAN repository](https://github.com/chrfrantz/DBSCAN.git) (Command: `mvn package`) which contains the underlying DBSCAN algorithm. Place both jar files in the extensions subfolder `dbscan` (following the structure described under Variant 2).
+In addition, you will need to build the [DBSCAN repository](https://github.com/chrfrantz/DBSCAN.git) (Command: `mvn package`) which contains the underlying DBSCAN algorithm. Place both jar files in the extensions subfolder `dbscan` (following the structure described under Variant 2). Note that all builds have been tested using Oracle's JDK 1.8.
 
 ## Bugs and requests
 
