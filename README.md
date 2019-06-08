@@ -1,9 +1,9 @@
 # NetLogo-Extension-DBSCAN
 NetLogo extension for DBSCAN clustering algorithm
 
-It allows you to perform unsupervised density-based clustering of turtles/agents and patches based on specified variables or by proximity. The main advantage over supervised algorithms such as K-Means is that it is not necessary to specify the number of resulting clusters in advance.
+The extension allows you to perform unsupervised density-based clustering of turtles/agents and patches based on specified variables or by proximity. The main advantage over supervised algorithms such as K-Means is that it is not necessary to specify the number of resulting clusters in advance.
 
-This extension supports all versions of [NetLogo](https://ccl.northwestern.edu/netlogo/) from 5 onwards, including the latest version 6.1. The feature set of the extension varies depending on the NetLogo version, with full feature support from NetLogo 6 onwards.
+This extension supports all versions of [NetLogo](https://ccl.northwestern.edu/netlogo/) from 5 onwards, including the latest version 6.1. The feature set of the extension varies depending on the NetLogo version, with full feature support from NetLogo 6 onwards (see details below).
 
 Author: Christopher Frantz
 
@@ -151,16 +151,16 @@ For a screenshot of the entire demo GUI including control elements and further c
 
 ## Deployment
 
-There are various deployment approaches available, reaching from simply auto-installation to building the extension from source. 
-Since NetLogo 6.1 the preferred deployment variant is simply to use the auto-installation feature (see Variant 0). Alternatively, you can install the extension using the Extension Manager provided by NetLogo 6.1 and higher (see Variant 1). For older versions of NetLogo (i.e., 6.0 or lower) you can download the corresponding jar files directly (Variant 2). Alternatively, for all supported versions of NetLogo you can build the extension from source (Variant 3).
+There are various deployment approaches available, ranging from simple auto-installation to building the extension from source. 
+Since NetLogo 6.1 the preferred deployment variant is the use of the auto-installation feature (see Variant 0). Alternatively, you can install the extension using the Extension Manager provided from NetLogo 6.1 onwards (see Variant 1). For older versions of NetLogo (i.e., 6.0 or lower) you can download the corresponding jar files directly (Variant 2). Alternatively, for all supported versions of NetLogo you can build the extension from source (Variant 3).
 
 ### Variant 0 (requires NetLogo 6.1.0 or higher): Auto-Installation
 
-To trigger the installation, simply add `extensions [dbscan]` at the top of your model code and click on the `Check` button in the editor (or switch tabs). NetLogo will then prompt you to confirm the installation of the extension and you can immediately use the clustering features in your code (Note: Sometimes a restart of NetLogo seems necessary to activate newly installed extensions). You can manage the installed extension in the Extension Manager. For more details about the Extension Manager, see Variant 1.
+To trigger the installation, simply add `extensions [dbscan]` at the top of your model code and click on the `Check` button in the editor (or switch tabs). NetLogo will then prompt you to confirm the installation of the extension and you can immediately use the clustering features in your code (Note: Sometimes a restart of NetLogo seems necessary to activate newly installed extensions). You can manage the installed extension in the Extension Manager. For more details about the installation via Extension Manager, see Variant 1.
 
 ### Variant 1 (requires NetLogo 6.1.0 or higher): Manual Installation via NetLogo Extension Manager
 
-Use the Extension Manager provided by NetLogo by selecting `Tools` in the menu bar, followed by `Extensions ...`. In the dialog, scroll down to the extension `DBSCAN` and click `Install`. You can now use it in your models. For more details about the Extension Manager, see its official [documentation](http://ccl.northwestern.edu/netlogo/docs/extension-manager.html).
+Use the Extension Manager provided by NetLogo by selecting `Tools` in the menu bar, followed by `Extensions ...`. In the dialog, scroll down to the extension `DBSCAN` and click `Install`. You can now use it in your models. For further details about the Extension Manager, see its official [documentation](http://ccl.northwestern.edu/netlogo/docs/extension-manager.html).
 
 ### Variant 2: Downloading jar files and placing in extensions folder
 
