@@ -1,6 +1,7 @@
 package org.nlogo.extensions.dbscan;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
@@ -353,9 +354,11 @@ public class TestNetLogoDBSCAN {
             clusterer.performClustering();
             fail("Clustering should not succeed.");
         } catch (DBSCANClusteringException e) {
-            assertEquals("Execution fails due to incorrect patch variable index",
-                    "java.lang.ArrayIndexOutOfBoundsException when accessing patch variable 6. Message: 6", 
-                    e.getMessage());
+            assertTrue("Execution fails due to incorrect patch variable index",
+                    // Oracle JDK version
+                    "java.lang.ArrayIndexOutOfBoundsException when accessing patch variable 6. Message: 6".equals(e.getMessage()) ||
+                    // OpenJDK version
+                    "java.lang.ArrayIndexOutOfBoundsException when accessing patch variable 6. Message: Index 6 out of bounds for length 6".equals(e.getMessage()));
         }
     }
 
