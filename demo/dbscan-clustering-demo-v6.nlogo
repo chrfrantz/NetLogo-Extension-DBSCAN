@@ -4,7 +4,7 @@
 ;
 ; Author: Christopher Frantz (cf@christopherfrantz.org)
 ;
-; Last update: 08/06/2019
+; Last update: 30/11/2020
 ;
 ; For documentation and details about the extension and supported NetLogo versions refer to
 ; https://github.com/chrfrantz/NetLogo-Extension-DBSCAN#readme
@@ -126,7 +126,7 @@ end
 to cluster-patches-by-variable
   setup
 
-  ; Cluster agents by variable "resource", with at least *minimum-number-of-members* members to constitute a cluster,
+  ; Cluster patches by variable "resource", with at least *minimum-number-of-members* members to constitute a cluster,
   ; and a maximum value difference of *maximum-distance-patches*
   let clusters dbscan:cluster-by-variable patches "resource" minimum-number-of-members maximum-distance-patches
 
@@ -138,7 +138,7 @@ to cluster-patches-by-variable
   foreach clusters [ [x] -> output-print x ]
 
   ; Colour individual patches based on cluster
-  output-print "\nClusters as AgentSets (and additional cluster information):"
+  output-print "\nClusters of patches as AgentSets (and additional cluster information):"
   let ctr 1
   (foreach clusters (n-of (length clusters) base-colors)
     [ [ x y ] -> let aset patches with [ member? self x ]
@@ -625,7 +625,7 @@ false
 Polygon -7500403 true true 270 75 225 30 30 225 75 270
 Polygon -7500403 true true 30 75 75 30 270 225 225 270
 @#$#@#$#@
-NetLogo 6.1.0
+NetLogo 6.1.1
 @#$#@#$#@
 @#$#@#$#@
 @#$#@#$#@
