@@ -3,9 +3,9 @@ NetLogo extension for DBSCAN clustering algorithm
 
 The extension allows you to perform unsupervised density-based clustering of turtles/agents and patches based on specified variables or by proximity. The main advantage over supervised algorithms such as K-Means is that it is not necessary to specify the number of resulting clusters in advance.
 
-This extension supports all versions of [NetLogo](https://ccl.northwestern.edu/netlogo/) from 5 onwards, including the latest version 6.1. The feature set of the extension varies depending on the NetLogo version, with full feature support from NetLogo 6 onwards (see details below).
+This extension supports all versions of [NetLogo](https://ccl.northwestern.edu/netlogo/) from 5 onwards, including the latest version 6.2. The feature set of the extension varies depending on the NetLogo version, with full feature support from NetLogo 6 onwards (see details below).
 
-Author: Christopher Frantz
+Author: Christopher Frantz (cf at christopherfrantz dot org)
 
 ## Usage
 
@@ -164,7 +164,7 @@ Use the Extension Manager provided by NetLogo by selecting `Tools` in the menu b
 
 ### Variant 2: Downloading jar files and placing in extensions folder
 
-To install the extension, download the zip file containing the latest version from the [releases page](https://github.com/chrfrantz/NetLogo-Extension-DBSCAN/releases) for your NetLogo version (5, 6, or 6.1). It contains a folder `dbscan` that contains all relevant jar files. Unzip it to the `extensions` folder of your NetLogo installation (the final structure should correspond to `NetLogo x.x.x/app/extensions/dbscan/<jar files>`, with `x.x.x` being the installed NetLogo version).
+To install the extension, download the zip file containing the latest version from the [releases page](https://github.com/chrfrantz/NetLogo-Extension-DBSCAN/releases) for your NetLogo version (5, 6, or 6.1 onwards). It contains a folder `dbscan` that contains all relevant jar files. Unzip it to the `extensions` folder of your NetLogo installation (the final structure should correspond to `NetLogo x.x.x/app/extensions/dbscan/<jar files>`, with `x.x.x` being the installed NetLogo version).
 
 ### Variant 3: Building from source
 
@@ -174,9 +174,9 @@ You can build the extension from scratch using maven after cloning the repositor
 
 * For NetLogo version 6, run `mvn clean package -f pom-v6.xml`
 
-* For NetLogo version 6.1, run `mvn clean package -f pom-v6.1.xml`
+* For NetLogo version 6.1 and higher, run `mvn clean package -f pom-v6.1.xml`
 
-In addition, you will need to build the [DBSCAN repository](https://github.com/chrfrantz/DBSCAN.git) (Command: `mvn package`) which contains the underlying DBSCAN algorithm. Place both jar files in the extensions subfolder `dbscan` (following the structure described under Variant 2). Note that all builds have been tested using Oracle's JDK 1.8.
+In addition, you will need to build the [DBSCAN repository](https://github.com/chrfrantz/DBSCAN.git) (Command: `mvn package`) which contains the underlying DBSCAN algorithm. Place both jar files in the extensions subfolder `dbscan` (following the structure described under Variant 2). Note that all builds have been primarily tested using Oracle's JDK 1.8.
 
 ## Bugs and requests
 
