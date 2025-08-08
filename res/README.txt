@@ -1,4 +1,7 @@
-This archive contains the DBSCAN Extension for NetLogo, v0.4 (08.06.2019). 
+This archive contains the DBSCAN Extension for NetLogo, v0.5 (06.06.2025).
+
+Note that this version (v0.5) is compiled for Netlogo 7. Please find older versions 
+in the corresponding git repository branch.
 
 Key features:
 - Density-based clustering of turtles and patches by location and variables

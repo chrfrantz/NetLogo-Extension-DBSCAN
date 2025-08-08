@@ -34,7 +34,7 @@ import org.nlogo.extensions.dbscan.metrics.DistanceMetricNetLogoAgentLocationVer
  * Website: https://github.com/chrfrantz/NetLogo-Extension-DBSCAN
  * 
  * @author <a href="mailto:cf@christopherfrantz.org>Christopher Frantz</a>
- * @version 0.4 (08.06.2019)
+ * @version 0.5 (06.08.2025)
  *
  */
 public class DBSCANExtension extends DefaultClassManager {

@@ -4,7 +4,7 @@
 
   <groupId>org.nlogo.extensions.dbscan</groupId>
   <artifactId>dbscan</artifactId>
-  <version>0.4</version>
+  <version>0.5</version>
   <packaging>pom</packaging>
 
   <repositories>
@@ -13,19 +13,32 @@
       <url>https://mvnrepository.com</url>
     </repository>
     <repository>
-      <id>jitpack.io</id>
-      <url>https://jitpack.io</url>
+      <id>netlogo-netlogo</id>
+      <url>https://dl.cloudsmith.io/public/netlogo/netlogo/maven/</url>
+      <releases>
+        <enabled>true</enabled>
+        <updatePolicy>always</updatePolicy>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+        <updatePolicy>always</updatePolicy>
+      </snapshots>
     </repository>
     <repository>
-      <id>in-project</id>
-      <name>In Project Repo</name>
-      <url>file://${project.basedir}/libs</url>
+      <id>jogamp</id>
+      <name>JogAmp Repository</name>
+      <url>https://jogamp.org/deployment/maven</url>
+    </repository>
+    <repository>
+      <id>jitpack.io</id>
+      <url>https://jitpack.io</url>
     </repository>
   </repositories>
 
   <properties>
-    <maven.compiler.source>1.8</maven.compiler.source>
-    <maven.compiler.target>1.8</maven.compiler.target>
+    <!--<maven.compiler.source>11</maven.compiler.source>
+    <maven.compiler.target>11</maven.compiler.target>-->
+	<maven.compiler.release>11</maven.compiler.release>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
@@ -38,7 +51,7 @@
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>4.9</version>
+      <version>4.13.1</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
@@ -55,33 +68,66 @@
     </resources>
     <plugins>
       <plugin>
+	    <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-jar-plugin -->
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-jar-plugin</artifactId>
-        <version>3.0.2</version>
+        <version>3.4.2</version>
         <configuration>
           <archive>
             <manifestFile>src/main/resources/manifest.txt</manifestFile>
           </archive>
         </configuration>
+		<executions>
+        <execution>
+          <id>early-jar</id>
+          <phase>process-test-classes</phase>
+          <goals>
+            <goal>jar</goal>
+          </goals>
+		  <configuration>
+            <classifier>early</classifier>
+          </configuration>
+        </execution>
+      </executions>
       </plugin>
 	  <plugin>
+	    <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-compiler-plugin -->
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.1</version>
+        <version>3.14.0</version>
         <configuration>
 		  <compilerArgs>
 		    <arg>-Xlint:deprecation</arg>
           </compilerArgs>
         </configuration>
       </plugin>
+	  <!-- Copy the early-built JAR before tests -->
 	  <plugin>
+		<groupId>org.apache.maven.plugins</groupId>
+		<artifactId>maven-antrun-plugin</artifactId>
+		<version>3.0.0</version>
+		<executions>
+		  <execution>
+			<id>move-jar</id>
+			<phase>process-test-classes</phase>
+			<configuration>
+			  <target>
+				<move file="${project.build.directory}/${project.build.finalName}-early.jar"
+						tofile="${project.build.directory}/../src/test/resources/extensions/dbscan/dbscan.jar" />
+			  </target>
+			</configuration>
+			<goals>
+			  <goal>run</goal>
+			</goals>
+		  </execution>
+		</executions>
+	  </plugin>
+	  
+	  <plugin>
+	    <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-surefire-plugin -->
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
-        <version>2.12.4</version>
-	    <!--<configuration>
-          <reuseForks>false</reuseForks>
-          <forkCount>1</forkCount>
-        </configuration>-->
+        <version>3.5.3</version>
 	  </plugin>
     </plugins>
   </build>

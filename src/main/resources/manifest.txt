@@ -2,9 +2,9 @@ Manifest-Version: 1.0
 Extension-Name: dbscan
 Class-Manager: org.nlogo.extensions.dbscan.DBSCANExtension
 Specification-Title: NetLogo DBSCAN Extension
-Specification-Version: 0.4
+Specification-Version: 0.5
 Specification-Vendor: Christopher Frantz
 Implementation-Title: dbscan
-Implementation-Version: 0.4
+Implementation-Version: 0.5
 Implementation-Vendor: Christopher Frantz
-NetLogo-Extension-API-Version: 6.1
+NetLogo-Extension-API-Version: 7.0

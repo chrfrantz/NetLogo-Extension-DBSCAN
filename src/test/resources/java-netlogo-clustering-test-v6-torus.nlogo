@@ -32,7 +32,7 @@ to setup
 
   ; globals
   set min-wealth 10
-  set max-wealth 50
+  set max-wealth 60
 
   ; agents
   create-agents num-agents
@@ -46,9 +46,9 @@ to setup
 end
 @#$#@#$#@
 GRAPHICS-WINDOW
-210
+821
 10
-647
+1258
 448
 -1
 -1
@@ -71,6 +71,118 @@ GRAPHICS-WINDOW
 1
 ticks
 30.0
+
+BUTTON
+44
+33
+130
+66
+NIL
+pre-setup
+NIL
+1
+T
+OBSERVER
+NIL
+NIL
+NIL
+NIL
+1
+
+BUTTON
+45
+82
+108
+115
+NIL
+setup
+NIL
+1
+T
+OBSERVER
+NIL
+NIL
+NIL
+NIL
+1
+
+BUTTON
+167
+148
+808
+181
+Perform clustering test "testClusteringOfTurtlesByVariablesInExistingNetLogoModelHeadlessMaxDistance0"
+set clusters dbscan:cluster-by-variable agents \"wealth\" 2 0
+NIL
+1
+T
+OBSERVER
+NIL
+NIL
+NIL
+NIL
+1
+
+BUTTON
+45
+176
+151
+209
+Print clusters
+show length clusters\nshow clusters
+NIL
+1
+T
+OBSERVER
+NIL
+NIL
+NIL
+NIL
+1
+
+BUTTON
+45
+222
+172
+255
+Reset everything
+clear-all
+NIL
+1
+T
+OBSERVER
+NIL
+NIL
+NIL
+NIL
+1
+
+TEXTBOX
+26
+281
+306
+379
+Clicking the buttons from top to bottom emulates the test behaviour of the respective tests (for debugging).
+11
+0.0
+1
+
+BUTTON
+166
+100
+711
+133
+Perform cluster test "testClusteringOfTurtlesByVariablesInExistingNetLogoModelHeadless"
+set clusters dbscan:cluster-by-variable agents \"wealth\" 3 1
+NIL
+1
+T
+OBSERVER
+NIL
+NIL
+NIL
+NIL
+1
 
 @#$#@#$#@
 ## WHAT IS IT?
@@ -414,7 +526,7 @@ false
 Polygon -7500403 true true 270 75 225 30 30 225 75 270
 Polygon -7500403 true true 30 75 75 30 270 225 225 270
 @#$#@#$#@
-NetLogo 6.1.0
+NetLogo 6.4.0
 @#$#@#$#@
 @#$#@#$#@
 @#$#@#$#@

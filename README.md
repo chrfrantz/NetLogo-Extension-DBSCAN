@@ -3,7 +3,10 @@ NetLogo extension for DBSCAN clustering algorithm
 
 The extension allows you to perform unsupervised density-based clustering of turtles/agents and patches based on specified variables or by proximity. The main advantage over supervised algorithms such as K-Means is that it is not necessary to specify the number of resulting clusters in advance.
 
-This extension supports all versions of [NetLogo](https://ccl.northwestern.edu/netlogo/) from 5 onwards, including the latest version 6.2. The feature set of the extension varies depending on the NetLogo version, with full feature support from NetLogo 6 onwards (see details below).
+This extension supports all versions of [NetLogo](https://ccl.northwestern.edu/netlogo/) from 5 onwards. This version (0.5) is focused on Netlogo 7. 
+Versions of this extension for Netlogo 5 up to Netlogo 6.4 are provided in the repository branch v6.1. This Readme covers aspects of all versions (apart from installation). 
+
+The feature set of the extension varies depending on the NetLogo version, with full feature support since NetLogo 6 onwards (see details below).
 
 Author: Christopher Frantz (cf at christopherfrantz dot org)
 
@@ -52,7 +55,7 @@ let ctr 1
     set ctr (ctr + 1) ])
 ```
 
-The same example in NetLogo 6 or higher (due to syntax changes in NetLogo 6):
+The same example in NetLogo 6 and 7 (due to syntax changes in NetLogo 6):
 
 ```
 ; Colour and label the agents by cluster
@@ -96,7 +99,7 @@ patches-own [resource]
 let clusters dbscan:cluster-by-variable patches "resource" 3 20
 ```
 
-The output can then be modified as exemplified in the following (only for NetLogo 6 onwards):
+The output can then be modified as exemplified in the following (for NetLogo 6 onwards):
 
 ```
 ; Colour and label the agents by cluster
@@ -141,7 +144,9 @@ For more comprehensive examples for the feature set, try out the demo that corre
 
 * For NetLogo 5, use [demo/dbscan-clustering-demo-v5.nlogo](https://github.com/chrfrantz/NetLogo-Extension-DBSCAN/blob/master/demo/dbscan-clustering-demo-v5.nlogo). (Note: the NetLogo 5 demo model does not include an example for clustering patches in addition to agents; this feature is only available for NetLogo 6 onwards.)
 
-* For NetLogo 6 (and higher), use [demo/dbscan-clustering-demo-v6.nlogo](https://github.com/chrfrantz/NetLogo-Extension-DBSCAN/blob/master/demo/dbscan-clustering-demo-v6.nlogo).
+* For NetLogo 6 variants, use [demo/dbscan-clustering-demo-v6.nlogo](https://github.com/chrfrantz/NetLogo-Extension-DBSCAN/blob/master/demo/dbscan-clustering-demo-v6.nlogo).
+
+* For NetLogo 7, use [demo/dbscan-clustering-demo-v7.nlogox](https://github.com/chrfrantz/NetLogo-Extension-DBSCAN/blob/master/demo/dbscan-clustering-demo-v7.nlogox).
 
 Clustering agents by location using any of the demo models should produce the following output (in this example the cluster centroid is shown as a coloured patch).
 
@@ -170,13 +175,11 @@ To install the extension, download the zip file containing the latest version fr
 
 You can build the extension from scratch using maven after cloning the repository. 
 
-* For NetLogo version 5, run `mvn clean package -f pom-v5.xml`
+* Simply run `mvn clean package` in the repository directory.
 
-* For NetLogo version 6, run `mvn clean package -f pom-v6.xml`
+* For older Netlogo versions, please consult the Readme in branch v6.1 (it also covers installation aspects related to Netlogo version 5).
 
-* For NetLogo version 6.1 and higher, run `mvn clean package -f pom-v6.1.xml`
-
-In addition, you will need to build the [DBSCAN repository](https://github.com/chrfrantz/DBSCAN.git) (Command: `mvn package`) which contains the underlying DBSCAN algorithm. Place both jar files in the extensions subfolder `dbscan` (following the structure described under Variant 2). Note that all builds have been primarily tested using Oracle's JDK 1.8.
+In addition, you will need to build the [DBSCAN repository](https://github.com/chrfrantz/DBSCAN.git) (Command: `mvn package`) which contains the underlying DBSCAN algorithm. Place both jar files in the extensions subfolder `dbscan` (following the structure described under Variant 2). Note that all builds have been primarily tested using Java 11.
 
 ## Bugs and requests
 

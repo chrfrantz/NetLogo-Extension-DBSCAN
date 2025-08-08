@@ -26,9 +26,9 @@ import org.nlogo.headless.HeadlessWorkspace;
 
 /**
  * Tests DBSCAN clusterer using an existing NetLogo model and injecting agents to be clustered.
- * These tests have been written against the NetLogo API 6.1.
+ * These tests have been written against the NetLogo API 7 (which is largely compatible with 6).
  * 
- * Website: https://github.com/chrfrantz/NetLogo-Extension-DBSCAN
+ * Website: <a href="URL">https://github.com/chrfrantz/NetLogo-Extension-DBSCAN</a>
  * 
  * Setup:
  * - Import all jar libraries from the app folder contained in the in NetLogo installation folder.
@@ -38,14 +38,20 @@ import org.nlogo.headless.HeadlessWorkspace;
  * - Ensure that the dbscan extension is installed in NetLogo (see the website above for installation instructions).
  * 
  * Note: If you get test errors related to varying error messages, check which JDK you are running. 
- *       All tests have been written against Oracle JDK 1.8.
+ *       All tests have been written with compliance to Java 11 compilers.
  *
  * @author Christopher Frantz <cf@christopherfrantz.org>
- * @version 0.4 (08.06.2019)
+ * @version 0.5 (06.08.2025)
  *
  */
 
 public class TestNetLogoDBSCAN {
+
+    /**
+     * Extension folder containing extensions relevant for tests
+     */
+    public static final String EXTENSIONS_FOLDER = System.getProperty("user.dir")
+            + "/src/test/resources/extensions";
 
     /**
      * Test model used by most tests - with NetLogo default torus topology
@@ -75,6 +81,11 @@ public class TestNetLogoDBSCAN {
      * Produces additional output helpful for debugging tests.
      */
     public static final boolean debugOutput = false;
+
+    static {
+        // Set extensions directory containing generated extension
+        System.setProperty("netlogo.extensions.dir", EXTENSIONS_FOLDER);
+    }
 
     @Test
     public void testClusteringOfTurtlesByVariablesInExistingNetLogoModelFromJava() {
@@ -140,7 +151,7 @@ public class TestNetLogoDBSCAN {
         ArrayList<ArrayList<Agent>> result = null;
 
         try {
-            DBSCANClusterer<Agent> clusterer = new DBSCANClusterer<Agent>(l2, minCluster, maxDistance, new DistanceMetricNetLogoAgentVariable(VARIABLE));
+            DBSCANClusterer<Agent> clusterer = new DBSCANClusterer<>(l2, minCluster, maxDistance, new DistanceMetricNetLogoAgentVariable(VARIABLE));
             result = clusterer.performClustering();
         } catch (DBSCANClusteringException e) {
             fail("Exception during clustering operation: " + e);
@@ -217,7 +228,7 @@ public class TestNetLogoDBSCAN {
         double maxDistance = 5;
 
         try {
-            DBSCANClusterer<Agent> clusterer = new DBSCANClusterer<Agent>(l2, minCluster, maxDistance, new DistanceMetricNetLogoAgentVariable(VARIABLE + "2"));
+            DBSCANClusterer<Agent> clusterer = new DBSCANClusterer<>(l2, minCluster, maxDistance, new DistanceMetricNetLogoAgentVariable(VARIABLE + "2"));
             clusterer.performClustering();
             fail("Clustering should not succeed.");
         } catch (DBSCANClusteringException e) {
@@ -281,7 +292,7 @@ public class TestNetLogoDBSCAN {
         ArrayList<ArrayList<Agent>> result = null;
 
         try {
-            DBSCANClusterer<Agent> clusterer = new DBSCANClusterer<Agent>(clusterInput, minCluster, maxDistance, new DistanceMetricNetLogoPatchVariable(variableIdx));
+            DBSCANClusterer<Agent> clusterer = new DBSCANClusterer<>(clusterInput, minCluster, maxDistance, new DistanceMetricNetLogoPatchVariable(variableIdx));
             result = clusterer.performClustering();
         } catch (DBSCANClusteringException e) {
             fail("Error during clustering operation: " + e);
@@ -350,7 +361,7 @@ public class TestNetLogoDBSCAN {
 
         try {
             // Initialise with invalid variable index
-            DBSCANClusterer<Agent> clusterer = new DBSCANClusterer<Agent>(clusterInput, minCluster, maxDistance, new DistanceMetricNetLogoPatchVariable(variableIdx + 1));
+            DBSCANClusterer<Agent> clusterer = new DBSCANClusterer<>(clusterInput, minCluster, maxDistance, new DistanceMetricNetLogoPatchVariable(variableIdx + 1));
             clusterer.performClustering();
             fail("Clustering should not succeed.");
         } catch (DBSCANClusteringException e) {
@@ -365,8 +376,7 @@ public class TestNetLogoDBSCAN {
     @Test
     public void testClusteringOfTurtlesByLocationInExistingNetLogoModelTorusHeadless() {
 
-        HeadlessWorkspace workspace =
-            HeadlessWorkspace.newInstance() ;
+        HeadlessWorkspace workspace = HeadlessWorkspace.newInstance();
         try {
           // Load model
           workspace.open(TESTMODEL_TORUS, false);
@@ -418,7 +428,7 @@ public class TestNetLogoDBSCAN {
     public void testClusteringOfTurtlesByLocationInExistingNetLogoModelVerticalCylinderHeadless() {
 
         HeadlessWorkspace workspace =
-            HeadlessWorkspace.newInstance() ;
+            HeadlessWorkspace.newInstance();
         try {
           // Load model
           workspace.open(TESTMODEL_VERTICAL_CYLINDER, false);
@@ -635,8 +645,7 @@ public class TestNetLogoDBSCAN {
     @Test
     public void testClusteringOfTurtlesByVariablesInExistingNetLogoModelHeadless() {
 
-        HeadlessWorkspace workspace =
-            HeadlessWorkspace.newInstance() ;
+        HeadlessWorkspace workspace = HeadlessWorkspace.newInstance();
         try {
           // Load model
           workspace.open(TESTMODEL_TORUS, false);
@@ -644,13 +653,18 @@ public class TestNetLogoDBSCAN {
           workspace.command("pre-setup");
           // Setting up entities
           workspace.command("setup");
+          if (debugOutput) {
+              // List initialized wealth
+              System.out.println("Wealth of initialized agents: " + workspace.report("[wealth] of agents"));
+          }
           // Run clustering
           workspace.command("set clusters dbscan:cluster-by-variable agents \"wealth\" 3 1");
           if (debugOutput) {
               // Print clusters
-              System.out.println(workspace.report("length clusters"));
+              System.out.println("Cluster count: " + workspace.report("length clusters"));
+              System.out.println("Clusters: " + workspace.report("clusters"));
           }
-          assertEquals("Number of clusters expected", 2.0, workspace.report("length clusters"));
+          assertEquals("Number of clusters expected", 4.0, workspace.report("length clusters"));
           workspace.dispose();
         } catch(Exception ex) {
           fail("Clustering was not successful (but should have been). Exception: " + ex.getMessage());
@@ -764,9 +778,18 @@ public class TestNetLogoDBSCAN {
           workspace.command("pre-setup");
           // Initialise agents
           workspace.command("setup");
+          if (debugOutput) {
+              // Print initialized agents
+              System.out.println("Wealth of initialized agents: " + workspace.report("[wealth] of agents"));
+          }
           // Run clustering with max distance set to 0
           workspace.command("set clusters dbscan:cluster-by-variable agents \"wealth\" 2 0");
-          assertEquals("Number of clusters expected", 34.0, workspace.report("length clusters"));
+          if (debugOutput) {
+              // Print clusters
+              System.out.println("Cluster count: " + workspace.report("length clusters"));
+              System.out.println("Clusters: " + workspace.report("clusters"));
+          }
+          assertEquals("Number of clusters expected", 40.0, workspace.report("length clusters"));
           workspace.dispose();
         } catch(Exception ex) {
           fail("Maximum distance of 0 should be permissible input. Exception: " + ex.getMessage());
