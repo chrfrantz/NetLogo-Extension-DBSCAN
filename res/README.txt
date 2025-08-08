@@ -1,4 +1,4 @@
-This archive contains the DBSCAN Extension for NetLogo, v0.5 (06.06.2025).
+This archive contains the DBSCAN Extension for NetLogo, v0.5 (06.08.2025).
 
 Note that this version (v0.5) is compiled for Netlogo 7. Please find older versions 
 in the corresponding git repository branch.
