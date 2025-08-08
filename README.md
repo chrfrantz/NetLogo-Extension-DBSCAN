@@ -156,7 +156,8 @@ For a screenshot of the entire demo GUI including control elements and further c
 
 ## Deployment
 
-There are various deployment approaches available, ranging from simple auto-installation to building the extension from source. 
+*Netlogo supports various deployment approaches, ranging from simple auto-installation to building the extension from source. This section describes all the options, but note that this branch only contains files for extension version 0.5 (for Netlogo 7); code for older Netlogo versions (5 and 6) can be found in the repository branch v6.1.*
+
 Since NetLogo 6.1 the preferred deployment variant is the use of the auto-installation feature (see Variant 0). Alternatively, you can install the extension using the Extension Manager provided from NetLogo 6.1 onwards (see Variant 1). For older versions of NetLogo (i.e., 6.0 or lower) you can download the corresponding jar files directly (Variant 2). Alternatively, for all supported versions of NetLogo you can build the extension from source (Variant 3).
 
 ### Variant 0 (requires NetLogo 6.1.0 or higher): Auto-Installation
@@ -173,7 +174,7 @@ To install the extension, download the zip file containing the latest version fr
 
 ### Variant 3: Building from source
 
-You can build the extension from scratch using maven after cloning the repository. 
+You can build the extension for Netlogo 7 from scratch using maven after cloning the repository. 
 
 * Simply run `mvn clean package` in the repository directory.
 
