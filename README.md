@@ -121,7 +121,7 @@ extensions [dbscan]
 ; Cluster agents by location, with at least 3 members to constitute a cluster, and a maximum distance of 3
 let clusters dbscan:cluster-by-location agents 3 3
 ```
-The clusters can then be used as shown in the section **Clustering individuals by variable**.
+The clusters can then be used as shown in the section [**Clustering individuals by variable**](https://github.com/chrfrantz/NetLogo-Extension-DBSCAN#clustering-individuals-by-variable).
 
 ## Demo
 
