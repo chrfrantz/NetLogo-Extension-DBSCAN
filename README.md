@@ -137,7 +137,7 @@ For a screenshot of the entire demo GUI including control elements and further c
 
 ## Deployment
 
-*Netlogo supports various deployment approaches, ranging from simple auto-installation to building the extension from source. This section describes all the options, but note that this branch only contains files for extension version 0.5 (for Netlogo 7); code for older Netlogo versions (5 and 6) can be found in the repository branch v6.1.*
+*NetLogo supports various deployment approaches, ranging from simple auto-installation to building the extension from source. This section describes all the options, but note that this branch only contains files for extension version 0.5 (for NetLogo 7); code for older NetLogo versions (5 and 6) can be found in the repository branch v6.1.*
 
 Since NetLogo 6.1 the preferred deployment variant is the use of the auto-installation feature (see Variant 0). Alternatively, you can install the extension using the Extension Manager provided from NetLogo 6.1 onwards (see Variant 1). For older versions of NetLogo (i.e., 6.0 or lower) you can download the corresponding jar files directly (Variant 2). Alternatively, for all supported versions of NetLogo you can build the extension from source (Variant 3).
 
@@ -155,11 +155,11 @@ To install the extension, download the zip file containing the latest version fr
 
 ### Variant 3: Building from source
 
-You can build the extension for Netlogo 7 from scratch using maven after cloning the repository. 
+You can build the extension for NetLogo 7 from scratch using [maven](https://maven.apache.org/) after cloning the repository. 
 
 * Simply run `mvn clean package` in the repository directory.
 
-* For older Netlogo versions, please consult the Readme in branch v6.1 (it also covers installation aspects related to Netlogo version 5).
+* For older NetLogo versions, please consult the Readme in branch v6.1 (it also covers installation aspects related to Netlogo version 5).
 
 In addition, you will need to build the [DBSCAN repository](https://github.com/chrfrantz/DBSCAN.git) (Command: `mvn package`) which contains the underlying DBSCAN algorithm. Place both jar files in the extensions subfolder `dbscan` (following the structure described under Variant 2). Note that all builds have been primarily tested using Java 11.
 
