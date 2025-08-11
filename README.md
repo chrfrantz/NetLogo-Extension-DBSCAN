@@ -4,7 +4,7 @@ NetLogo extension for DBSCAN clustering algorithm
 The extension allows you to perform unsupervised density-based clustering of turtles/agents and patches based on specified variables or by proximity. The main advantage over supervised algorithms such as K-Means is that it is not necessary to specify the number of resulting clusters in advance.
 
 This extension supports all versions of [NetLogo](https://ccl.northwestern.edu/netlogo/) from 5 onwards. This version (0.5) is focused on Netlogo 7. 
-Versions of this extension for NetLogo version 5 up to version 6.4 are provided in the repository branch v6.1 (including code examples). This Readme covers aspects specific to the latest extension version. 
+Versions of this extension (all versions up to 0.4) for NetLogo versions 5 up to version 6.4 are provided in the repository [branch v6.1](https://github.com/chrfrantz/NetLogo-Extension-DBSCAN/tree/v6.1) (including code examples). This Readme covers aspects specific to the latest extension version. 
 
 The feature set of the extension varies depending on the NetLogo version, with full feature support since NetLogo 6 onwards (see details below).
 
@@ -127,7 +127,7 @@ The clusters can then be used as shown in the section [**Clustering individuals 
 
 For more comprehensive examples for the feature set, try out the demo provided as part of the extension under [demo/dbscan-clustering-demo-v7.nlogox](https://github.com/chrfrantz/NetLogo-Extension-DBSCAN/blob/master/demo/dbscan-clustering-demo-v7.nlogox). 
 
-Demo models for NetLogo versions 5 and 6 are provided alongside versions 0.4 of the extension (see repository branch v6.1).
+Demo models for NetLogo versions 5 and 6 are provided alongside versions 0.4 of the extension (see repository [branch v6.1](https://github.com/chrfrantz/NetLogo-Extension-DBSCAN/tree/v6.1)).
 
 Clustering agents by location should produce the following output (in this example the cluster centroid is shown as a coloured patch).
 
@@ -159,7 +159,7 @@ You can build the extension for NetLogo 7 from scratch using [maven](https://mav
 
 * Simply run `mvn clean package` in the repository directory.
 
-* For older NetLogo versions, please consult the Readme in branch v6.1 (it also covers installation aspects related to Netlogo version 5).
+* For older NetLogo versions, please consult the [Readme in branch v6.1](https://github.com/chrfrantz/NetLogo-Extension-DBSCAN/tree/v6.1#readme) (it also covers installation aspects related to Netlogo version 5).
 
 In addition, you will need to build the [DBSCAN repository](https://github.com/chrfrantz/DBSCAN.git) (Command: `mvn package`) which contains the underlying DBSCAN algorithm. Place both jar files in the extensions subfolder `dbscan` (following the structure described under Variant 2). Note that all builds have been primarily tested using Java 11.
 
