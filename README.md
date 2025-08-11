@@ -161,7 +161,7 @@ You can build the extension for NetLogo 7 from scratch using [maven](https://mav
 
 * For older NetLogo versions, please consult the [Readme in branch v6.1](https://github.com/chrfrantz/NetLogo-Extension-DBSCAN/tree/v6.1#readme) (it also covers installation aspects related to Netlogo version 5).
 
-In addition, you will need to build the [DBSCAN repository](https://github.com/chrfrantz/DBSCAN.git) (Command: `mvn package`) which contains the underlying DBSCAN algorithm. Place both jar files in the extensions subfolder `dbscan` (following the structure described under Variant 2). Note that all builds have been primarily tested using Java 11.
+In addition, you will need to build the [DBSCAN repository](https://github.com/chrfrantz/DBSCAN.git) (Command: `mvn clean package`) which contains the underlying DBSCAN algorithm. Place both jar files in the extensions subfolder `dbscan` (following the structure described under Variant 2). Note that all builds have been primarily tested using Java 11.
 
 ## Bugs and requests
 
