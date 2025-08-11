@@ -3,7 +3,7 @@ NetLogo extension for DBSCAN clustering algorithm
 
 The extension allows you to perform unsupervised density-based clustering of turtles/agents and patches based on specified variables or by proximity. The main advantage over supervised algorithms such as K-Means is that it is not necessary to specify the number of resulting clusters in advance.
 
-This extension supports all versions of [NetLogo](https://ccl.northwestern.edu/netlogo/) from 5 onwards. This version (0.5) is focused on Netlogo 7. 
+This extension supports all versions of [NetLogo](https://ccl.northwestern.edu/netlogo/) from 5 onwards. This version (0.5) is focused on NetLogo 7. 
 Versions of this extension (all versions up to 0.4) for NetLogo versions 5 up to version 6.4 are provided in the repository [branch v6.1](https://github.com/chrfrantz/NetLogo-Extension-DBSCAN/tree/v6.1) (including code examples). This Readme covers aspects specific to the latest extension version. 
 
 The feature set of the extension varies depending on the NetLogo version, with full feature support since NetLogo 6 onwards (see details below).
