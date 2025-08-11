@@ -4,7 +4,7 @@ NetLogo extension for DBSCAN clustering algorithm
 The extension allows you to perform unsupervised density-based clustering of turtles/agents and patches based on specified variables or by proximity. The main advantage over supervised algorithms such as K-Means is that it is not necessary to specify the number of resulting clusters in advance.
 
 This extension supports all versions of [NetLogo](https://ccl.northwestern.edu/netlogo/) from 5 onwards. This version (0.5) is focused on Netlogo 7. 
-Versions of this extension for Netlogo 5 up to Netlogo 6.4 are provided in the repository branch v6.1. This Readme covers aspects of all versions (apart from installation). 
+Versions of this extension for NetLogo version 5 up to version 6.4 are provided in the repository branch v6.1 (including code examples). This Readme covers aspects specific to the latest extension version. 
 
 The feature set of the extension varies depending on the NetLogo version, with full feature support since NetLogo 6 onwards (see details below).
 
@@ -40,22 +40,7 @@ let clusters dbscan:cluster-by-variable agents "wealth" 3 3
 
 You can then use the cluster information to modify the output, e.g. by colouring and labelling the turtles.
 
-Example (NetLogo 5):
-
-```
-; Colour and label the agents by cluster
-let ctr 1
-(foreach clusters (n-of (length clusters) base-colors)
-  [ let aset turtles with [ member? self ?1 ]
-    ask aset
-      [ set color ?2
-        set label (word "ID: " who ", Cluster: " ctr ", Wealth: " wealth) ]
-    ; Print agent cluster sets
-    output-print (word "Cluster " ctr ": " aset)
-    set ctr (ctr + 1) ])
-```
-
-The same example in NetLogo 6 and 7 (due to syntax changes in NetLogo 6):
+Example (NetLogo 6 and 7):
 
 ```
 ; Colour and label the agents by cluster
@@ -99,7 +84,7 @@ patches-own [resource]
 let clusters dbscan:cluster-by-variable patches "resource" 3 20
 ```
 
-The output can then be modified as exemplified in the following (for NetLogo 6 onwards):
+The output can then be processed as exemplified in the following (for NetLogo 6 and 7):
 
 ```
 ; Colour and label the agents by cluster
@@ -166,7 +151,7 @@ Use the Extension Manager provided by NetLogo by selecting `Tools` in the menu b
 
 ### Variant 2: Downloading jar files and placing in extensions folder
 
-To install the extension, download the zip file containing the latest version from the [releases page](https://github.com/chrfrantz/NetLogo-Extension-DBSCAN/releases) for your NetLogo version (5, 6, or 6.1 onwards). It contains a folder `dbscan` that contains all relevant jar files. Unzip it to the `extensions` folder of your NetLogo installation (the final structure should correspond to `NetLogo x.x.x/app/extensions/dbscan/<jar files>`, with `x.x.x` being the installed NetLogo version).
+To install the extension, download the zip file containing the latest version from the [releases page](https://github.com/chrfrantz/NetLogo-Extension-DBSCAN/releases) for your NetLogo version (extension version 0.4 for NetLogo 5 and 6; extension version 0.5 for NetLogo 7). It contains a folder `dbscan` that contains all relevant jar files. Unzip it to the `extensions` folder of your NetLogo installation (the final structure should correspond to `NetLogo x.x.x/app/extensions/dbscan/<jar files>`, with `x.x.x` being the installed NetLogo version).
 
 ### Variant 3: Building from source
 
