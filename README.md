@@ -133,7 +133,7 @@ Clustering agents by location should produce the following output (in this examp
 
 ![Location-based clustering demo output](https://github.com/chrfrantz/NetLogo-Extension-DBSCAN/raw/master/doc/ExampleLocationBasedClusteringOutput.png)
 
-For a screenshot of the entire demo GUI including control elements and further cluster-related information have a look [here](https://github.com/chrfrantz/NetLogo-Extension-DBSCAN/raw/master/doc/NetLogoDbscanDemoGui.png).
+For a screenshot of the entire demo GUI including control elements and further cluster-related information have a look [here](https://github.com/chrfrantz/NetLogo-Extension-DBSCAN/raw/master/doc/NetLogo7DbscanDemoGuiAgentLocation.png).
 
 ## Deployment
 
