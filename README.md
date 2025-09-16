@@ -143,7 +143,9 @@ Since NetLogo 6.1 the preferred deployment variant is the use of the auto-instal
 
 ### Variant 0 (requires NetLogo 6.1.0 or higher): Auto-Installation
 
-To trigger the installation, simply add `extensions [dbscan]` at the top of your model code and click on the `Check` button in the editor (or switch tabs). NetLogo will then prompt you to confirm the installation of the extension and you can immediately use the clustering features in your code (Note: Sometimes a restart of NetLogo seems necessary to activate newly installed extensions). You can manage the installed extension in the Extension Manager. For more details about the installation via Extension Manager, see Variant 1.
+To trigger the installation, simply add `extensions [dbscan]` at the top of your model code and click on the `Check` button in the editor (or switch tabs). NetLogo will then prompt you to confirm the installation of the extension (NetLogo 6.1.0 onward) or indicate that the extension is not present and open the Extension Manager for you to install the extension manually (NetLogo 7.0.0), and once installed, you can immediately use the clustering features in your code (Note: Sometimes a restart of NetLogo seems necessary to activate newly installed extensions). You can manage the installed extension in the Extension Manager. For more details about the installation via Extension Manager, see Variant 1.
+
+You can also just download and open the [NetLogo 7 DBSCAN demo model](https://github.com/chrfrantz/NetLogo-Extension-DBSCAN/blob/master/demo/dbscan-clustering-demo-v7.nlogox) to trigger the installation.
 
 ### Variant 1 (requires NetLogo 6.1.0 or higher): Manual Installation via NetLogo Extension Manager
 
